@@ -9,9 +9,11 @@ namespace TCYDMWebServices.Repositories.Enums
     {
         public enum Errors
         {
-            Internal,
+            Internal = 1,
             NotFound,
-            ValidationFailed
+            ValidationFailed,
+            AlreadyExists,
+            WrongPassword
         }
     }
 }

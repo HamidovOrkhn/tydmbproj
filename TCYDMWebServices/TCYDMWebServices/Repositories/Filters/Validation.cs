@@ -21,22 +21,15 @@ namespace TCYDMWebServices.Repositories.Filters
             {
                 var error = context.ModelState.Values;
                 var key = context.ModelState.Keys;
-                context.Result = new BadRequestObjectResult(
-                    new ReturnErrorMessage
-                    {
-                        Code = 400,
-                        Message = "Validation error occured",
-                        ErrorType = (int)ErrorTypes.Errors.ValidationFailed,
-                        Data = new
-                        {
-                            Error = error.Select(a => a.Errors),
-                            Key = key
-                        }
-
-                      
-                            
-                        
-                    });
+                context.Result = new BadRequestObjectResult(new ReturnErrorMessage(
+                    (int)ErrorTypes.Errors.ValidationFailed,
+                    data:new {
+                        Errors = error,
+                        Keys = key
+                    },
+                    message:"Validation failed !"
+                    ));
+                                                                
             }
         }
     }

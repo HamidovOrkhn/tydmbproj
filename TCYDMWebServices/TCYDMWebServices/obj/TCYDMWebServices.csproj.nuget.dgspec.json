@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Orxan\\source\\repos\\TCYDMWebServices\\TCYDMWebServices\\TCYDMWebServices.csproj": {}
+    "C:\\Users\\Orxan\\source\\repos\\tydmbproj\\TCYDMWebServices\\TCYDMWebServices\\TCYDMWebServices.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Orxan\\source\\repos\\TCYDMWebServices\\TCYDMWebServices\\TCYDMWebServices.csproj": {
+    "C:\\Users\\Orxan\\source\\repos\\tydmbproj\\TCYDMWebServices\\TCYDMWebServices\\TCYDMWebServices.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Orxan\\source\\repos\\TCYDMWebServices\\TCYDMWebServices\\TCYDMWebServices.csproj",
+        "projectUniqueName": "C:\\Users\\Orxan\\source\\repos\\tydmbproj\\TCYDMWebServices\\TCYDMWebServices\\TCYDMWebServices.csproj",
         "projectName": "TCYDMWebServices",
-        "projectPath": "C:\\Users\\Orxan\\source\\repos\\TCYDMWebServices\\TCYDMWebServices\\TCYDMWebServices.csproj",
+        "projectPath": "C:\\Users\\Orxan\\source\\repos\\tydmbproj\\TCYDMWebServices\\TCYDMWebServices\\TCYDMWebServices.csproj",
         "packagesPath": "C:\\Users\\Orxan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Orxan\\source\\repos\\TCYDMWebServices\\TCYDMWebServices\\obj\\",
+        "outputPath": "C:\\Users\\Orxan\\source\\repos\\tydmbproj\\TCYDMWebServices\\TCYDMWebServices\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Orxan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -37,6 +37,34 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "CryptoHelper": {
+              "target": "Package",
+              "version": "[3.0.2, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "NSwag.AspNetCore": {
+              "target": "Package",
+              "version": "[13.10.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
