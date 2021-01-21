@@ -15,6 +15,8 @@ namespace TCYDMWebServices.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Region> Regions { get; set; }
+        public DbSet<OnlineQuery> OnlineQueries { get; set; }
+        public DbSet<Service> Services { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +27,8 @@ namespace TCYDMWebServices.Data
             modelBuilder.Entity<User>()
                 .HasOne(p => p.Regions)
                 .WithMany(b => b.Users);
+
+            
         }
     }
 }
