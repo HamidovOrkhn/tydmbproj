@@ -24,6 +24,11 @@ namespace TCYDMWebServices.DTO
         [EmailAddress]
         public string Email { get; set; }
         [Required]
+        [MaxLength(50)]
+        public string Gender { get; set; }
+        [Required]
+        public DateTime BornYear { get; set; }
+        [Required]
         [MaxLength(200)]
         [Phone]
         public string PhoneNumber { get; set; }

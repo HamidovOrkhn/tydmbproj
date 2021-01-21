@@ -17,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
+using TCYDMWebServices.Models;
 
 namespace TCYDMWebServices.Controllers.V1
 {
@@ -35,7 +36,7 @@ namespace TCYDMWebServices.Controllers.V1
             _configuration = config;
 
         }
-        [Authorize]
+       // [Authorize]
         [HttpGet("test")]
         public IActionResult Test()
         {
@@ -115,6 +116,36 @@ namespace TCYDMWebServices.Controllers.V1
                 ));
             #endregion
         }
+        [HttpPut("update/{Id}")]
+        public IActionResult Update([FromBody] UserDTO request, int Id)
+        {
+            #region FunctionBody
+            bool exist = _db.Users.Any(c => c.Id == Id);
+            if (!exist)
+            {
+                return StatusCode(400,new ReturnErrorMessage((int)ErrorTypes.Errors.NotFound));
+            }
+            string hashed = Crypto.HashPassword(request.Password);
+            request.Password = hashed;
+            bool IsUpdated = _userService.Update(request,Id);
+            if (!IsUpdated)
+            {
+                return StatusCode(500,new ReturnErrorMessage((int)ErrorTypes.Errors.Internal));
+            }
+            List<User> alreadyExist = _db.Users.Where(a => a.PhoneNumber == request.PhoneNumber || a.Email == request.Email).ToList();
+            if (alreadyExist.Count > 1)
+            {
+                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.AlreadyExists, message: "This credentials is used by another account"));
+            }
+            bool IsExisted = alreadyExist.Any(b=>b.Id == Id);
+            if (!IsExisted)
+            {
+                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.AlreadyExists, message: "This credentials is used by another account"));
+            }
+            return Ok(new ReturnMessage());
+            #endregion
+        }
+
 
     }
 }

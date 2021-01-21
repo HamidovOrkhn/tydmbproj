@@ -24,7 +24,13 @@ namespace TCYDMWebServices.Models
         [Required]
         [MaxLength(200)]
         [EmailAddress]
+
         public string Email { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public string Gender { get; set; }
+        [Required]
+        public DateTime BornYear { get; set; }
         [Required]
         [MaxLength(200)]
         [Phone]
@@ -32,6 +38,7 @@ namespace TCYDMWebServices.Models
         [Required]
         [MaxLength(200)]
         public string Password { get; set; }
+        
         [MaxLength(200)]
         public string Token { get; set; }
 

@@ -99,7 +99,26 @@ namespace TCYDMWebServices.Repositories.Repos
 
         public bool Update(UserDTO obj, int Id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                User user =_db.Users.Find(Id);
+                user.CountryId = obj.CountryId;
+                user.Email = obj.Email;
+                user.Name = obj.Name;
+                user.Password = obj.Password;
+                user.TCNo = obj.TCNo;
+                user.Surname = obj.Surname;
+                user.PhoneNumber = obj.PhoneNumber;
+                user.RegionId = obj.RegionId;
+                user.BornYear = obj.BornYear;
+                user.Gender = obj.Gender;
+                _db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
