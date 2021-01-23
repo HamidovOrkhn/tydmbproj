@@ -11,6 +11,7 @@ namespace TCYDMWebServices.DTO
         public int Id { get; set; }
         public int CountryId { get; set; }
         public int RegionId { get; set; }
+        public int SexId { get; set; }
         [Required]
         [MaxLength(200)]
         public string Name { get; set; }
@@ -23,9 +24,7 @@ namespace TCYDMWebServices.DTO
         [MaxLength(200)]
         [EmailAddress]
         public string Email { get; set; }
-        [Required]
-        [MaxLength(50)]
-        public string Gender { get; set; }
+
         [Required]
         public DateTime BornYear { get; set; }
         [Required]

@@ -17,6 +17,7 @@ namespace TCYDMWebServices.Data
         public DbSet<Region> Regions { get; set; }
         public DbSet<OnlineQuery> OnlineQueries { get; set; }
         public DbSet<Service> Services { get; set; }
+        public DbSet<Gender> Genders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

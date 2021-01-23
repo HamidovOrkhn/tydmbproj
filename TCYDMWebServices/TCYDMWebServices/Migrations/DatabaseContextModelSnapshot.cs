@@ -36,6 +36,21 @@ namespace TCYDMWebServices.Migrations
                     b.ToTable("Countries");
                 });
 
+            modelBuilder.Entity("TCYDMWebServices.Models.Gender", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Genders");
+                });
+
             modelBuilder.Entity("TCYDMWebServices.Models.OnlineQuery", b =>
                 {
                     b.Property<long>("Id")
@@ -51,6 +66,9 @@ namespace TCYDMWebServices.Migrations
 
                     b.Property<int>("ServiceId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -116,11 +134,6 @@ namespace TCYDMWebServices.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -137,6 +150,9 @@ namespace TCYDMWebServices.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("RegionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SexId")
                         .HasColumnType("int");
 
                     b.Property<string>("Surname")

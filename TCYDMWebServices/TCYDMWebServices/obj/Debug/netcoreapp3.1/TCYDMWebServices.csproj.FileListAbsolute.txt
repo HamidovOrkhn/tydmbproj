@@ -92,6 +92,10 @@ C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebServices\TCYDMWebServices\bin\Debu
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebServices\TCYDMWebServices\bin\Debug\netcoreapp3.1\NSwag.Generation.AspNetCore.dll
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebServices\TCYDMWebServices\bin\Debug\netcoreapp3.1\CryptoHelper.dll
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebServices\TCYDMWebServices\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebServices\TCYDMWebServices\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Server.Kestrel.Https.dll
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebServices\TCYDMWebServices\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.dll
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebServices\TCYDMWebServices\bin\Debug\netcoreapp3.1\Prometheus.NetStandard.dll
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebServices\TCYDMWebServices\bin\Debug\netcoreapp3.1\Prometheus.AspNetCore.dll
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebServices\TCYDMWebServices\obj\Debug\netcoreapp3.1\TCYDMWebServices.csproj.CoreCompileInputs.cache
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebServices\TCYDMWebServices\obj\Debug\netcoreapp3.1\TCYDMWebServices.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebServices\TCYDMWebServices\obj\Debug\netcoreapp3.1\TCYDMWebServices.MvcApplicationPartsAssemblyInfo.cache

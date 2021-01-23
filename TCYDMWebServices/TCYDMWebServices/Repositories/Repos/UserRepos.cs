@@ -28,7 +28,10 @@ namespace TCYDMWebServices.Repositories.Repos
                 Password= obj.Password,
                 PhoneNumber = obj.PhoneNumber,
                 RegionId = obj.RegionId,
-                TCNo = obj.TCNo
+                TCNo = obj.TCNo,
+                BornYear = obj.BornYear,
+                SexId = obj.SexId
+                
                 });
 
                 _db.SaveChanges();
@@ -37,7 +40,7 @@ namespace TCYDMWebServices.Repositories.Repos
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
 
@@ -45,7 +48,7 @@ namespace TCYDMWebServices.Repositories.Repos
         {
             try
             {
-                _db.Remove(new User
+                _db.Users.Remove(new User
                 {
                     Id = obj.Id,
                     Email = obj.Email,
@@ -57,7 +60,6 @@ namespace TCYDMWebServices.Repositories.Repos
                     Surname = obj.Surname,
                     TCNo = obj.TCNo
                 });
-                _db.SaveChanges();
 
                 return true;
             }
@@ -111,7 +113,7 @@ namespace TCYDMWebServices.Repositories.Repos
                 user.PhoneNumber = obj.PhoneNumber;
                 user.RegionId = obj.RegionId;
                 user.BornYear = obj.BornYear;
-                user.Gender = obj.Gender;
+                user.SexId = obj.SexId;
                 _db.SaveChanges();
                 return true;
             }

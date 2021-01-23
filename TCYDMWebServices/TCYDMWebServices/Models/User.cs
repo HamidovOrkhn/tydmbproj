@@ -26,9 +26,7 @@ namespace TCYDMWebServices.Models
         [EmailAddress]
 
         public string Email { get; set; }
-        [Required]
-        [MaxLength(50)]
-        public string Gender { get; set; }
+        public int SexId { get; set; }
         [Required]
         public DateTime BornYear { get; set; }
         [Required]

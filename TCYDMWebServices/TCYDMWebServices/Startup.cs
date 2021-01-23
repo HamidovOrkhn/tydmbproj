@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Prometheus;
 using TCYDMWebServices.Data;
 using TCYDMWebServices.DTO;
 using TCYDMWebServices.Repositories.Abstracts;
@@ -35,6 +36,7 @@ namespace TCYDMWebServices
             services.AddControllers();
             services.AddSwaggerDocument();
             services.AddTransient<ITransactions<UserDTO>,UserRepos>();
+            services.AddTransient<ITransactions<OnlineQueryDTO>, OnlineQueryRepos>();
             services.AddDbContext<DatabaseContext>(a => a.UseSqlServer(Configuration.GetConnectionString("DatabaseContext")));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
              .AddJwtBearer(options =>
@@ -67,7 +69,20 @@ namespace TCYDMWebServices
 
             app.UseAuthentication();
 
-            app.UseAuthorization();        
+            app.UseAuthorization();
+
+            var counter = Metrics.CreateCounter("peopleapi_path_counter", "Counts requests to the People API endpoints", new CounterConfiguration
+            {
+                LabelNames = new[] { "method", "endpoint" }
+            });
+            app.Use((context, next) =>
+            {
+                counter.WithLabels(context.Request.Method, context.Request.Path).Inc();
+                return next();
+            });
+            // Use the Prometheus middleware
+            app.UseMetricServer();
+            app.UseHttpMetrics();
 
             app.UseEndpoints(endpoints =>
             {

@@ -28,19 +28,27 @@ namespace TCYDMWebServices.Controllers.V1
     {
         private readonly DatabaseContext _db;
         private readonly ITransactions<UserDTO> _userService;
+        private readonly ITransactions<OnlineQueryDTO> _onlineQueryService;
         private readonly IConfiguration _configuration;
-        public UsersController(DatabaseContext db, ITransactions<UserDTO> userRepos, IConfiguration config)
+        public UsersController
+        (
+            DatabaseContext db, 
+            ITransactions<UserDTO> userRepos,
+            IConfiguration config,
+            ITransactions<OnlineQueryDTO> onlineRepos
+        )
         {
             _db = db;
             _userService = userRepos;
             _configuration = config;
+            _onlineQueryService = onlineRepos;
 
         }
        // [Authorize]
         [HttpGet("test")]
         public IActionResult Test()
         {
-            return Ok(_db.Users.ToList());
+            return Ok(Convert.ToInt32(DateTime.Now.Year));
         }
         [HttpPost("register")]
         public IActionResult Register([FromBody] UserDTO request)
@@ -83,12 +91,12 @@ namespace TCYDMWebServices.Controllers.V1
             bool existPhone = _db.Users.Any(a => a.PhoneNumber == request.Identification);
             if (!existEmail && !existPhone)
             {
-                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.NotFound, message: "This User is not exists"));
+                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.WrongUser, message: "This User is not exists"));
             }
             var user = _db.Users.FirstOrDefault(a => a.Email == request.Identification || a.PhoneNumber == request.Identification);
             if (!Crypto.VerifyHashedPassword(user.Password,request.Password))
             {
-                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.NotFound, message: "Wrong Password"));
+                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.WrongPassword, message: "Wrong Password"));
             }
             #region Jwt created and Refresh token updated
             var claim = new[] { new Claim(ClaimTypes.Name, user.Name) };
@@ -145,6 +153,51 @@ namespace TCYDMWebServices.Controllers.V1
             return Ok(new ReturnMessage());
             #endregion
         }
+        [HttpPost("online_query")]
+        public IActionResult GetOnlineQuery([FromBody] OnlineQueryDTO request)
+        {
+            #region FunctionBody
+            bool existedQuery = _db.OnlineQueries.Any(c => c.UserId == request.UserId);
+            if (existedQuery)
+            {
+                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.AlreadyExists));
+            }
+            request.StartDate = DateTime.Now;
+            int datecompare = DateTime.Compare(request.StartDate, request.ServiceDate);
+            if (datecompare>=0)
+            {
+                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.ValidationFailed));
+            }
+            bool isAdded = _onlineQueryService.Add(request);
+            if (!isAdded)
+            {
+                return StatusCode(500, new ReturnErrorMessage((int)ErrorTypes.Errors.Internal,code:500));
+            }
+            return Ok(new ReturnMessage());
+            #endregion
+        }
+        [HttpDelete("delete_existed_query/{Id}")]
+        public IActionResult DeleteOnlineQuery(int Id)
+        {
+            #region FunctionBody
+            var onlineQuery = _onlineQueryService.Get(Id);
+            if (onlineQuery == null)
+            {
+                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.NotFound));
+            }        
+            bool IsSucceed = _onlineQueryService.Delete(onlineQuery);
+            if (!IsSucceed)
+            {
+                return StatusCode(500, new ReturnErrorMessage((int)ErrorTypes.Errors.Internal,code:500));
+            }
+            return Ok(new ReturnMessage());
+            #endregion
+        }
+       
+
+
+
+
 
 
 

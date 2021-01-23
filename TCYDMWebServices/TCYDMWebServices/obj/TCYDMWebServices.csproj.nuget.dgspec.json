@@ -63,6 +63,10 @@
             "NSwag.AspNetCore": {
               "target": "Package",
               "version": "[13.10.1, )"
+            },
+            "prometheus-net.AspNetCore": {
+              "target": "Package",
+              "version": "[3.1.1, )"
             }
           },
           "imports": [
