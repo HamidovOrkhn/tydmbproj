@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace TCYDMWebServices.Models
 {
-    public class Service
+    public class WhatWeDo
     {
+        [Key]
         public int Id { get; set; }
         [Required]
-        [MaxLength(300)]
-        public string Name { get; set; }
+        public string Content { get; set; }
+        [Required]
         public int LanguageId { get; set; }
     }
 }

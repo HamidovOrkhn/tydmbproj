@@ -1,17 +1,18 @@
-﻿using System;
+﻿using System; 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TCYDMWebServices.Models
+namespace TCYDMWebServices.DTO
 {
-    public class Service
+    public class WhoWeAreDTO
     {
+        [Key]
         public int Id { get; set; }
         [Required]
-        [MaxLength(300)]
-        public string Name { get; set; }
+        public string Content { get; set; }
+        [Required]
         public int LanguageId { get; set; }
     }
 }

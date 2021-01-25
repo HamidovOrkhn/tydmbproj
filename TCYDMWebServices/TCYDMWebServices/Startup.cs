@@ -37,6 +37,10 @@ namespace TCYDMWebServices
             services.AddSwaggerDocument();
             services.AddTransient<ITransactions<UserDTO>,UserRepos>();
             services.AddTransient<ITransactions<OnlineQueryDTO>, OnlineQueryRepos>();
+            services.AddTransient<ITransactions<WhatWeDoDTO>, WhatWeDoRepos>();
+            services.AddTransient<ITransactions<WhoWeAreDTO>, WhoWeAreRepos>();
+            services.AddTransient<ITransactions<ContactUsDTO>, ContactUsRepos>();
+            services.AddTransient<ITransactions<OurServicesDTO>, OurServicesRepos>();
             services.AddDbContext<DatabaseContext>(a => a.UseSqlServer(Configuration.GetConnectionString("DatabaseContext")));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
              .AddJwtBearer(options =>

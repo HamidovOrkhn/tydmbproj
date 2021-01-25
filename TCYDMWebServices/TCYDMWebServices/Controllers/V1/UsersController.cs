@@ -193,7 +193,39 @@ namespace TCYDMWebServices.Controllers.V1
             return Ok(new ReturnMessage());
             #endregion
         }
-       
+        [HttpGet("refresh/{refreshToken}")]
+        public object RefreshToken(string refreshToken)
+        {
+            #region FunctionBody
+            User user = _db.Users.FirstOrDefault(a => a.Token == refreshToken);
+            if (user== null)
+            {
+                return BadRequest();
+            }
+            var claim = new[] { new Claim(ClaimTypes.Name, user.Name) };
+            var symmetric = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var signing = new SigningCredentials(symmetric, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                issuer: _configuration["Jwt:Issuer"],
+                audience: _configuration["Jwt:Issuer"],
+                expires: DateTime.Now.AddMinutes(10),
+                claims: claim,
+                signingCredentials: signing
+                );
+            //user.Token = Guid.NewGuid().ToString();
+
+            //_db.SaveChanges();
+            return new TokenResponse { token = user.Token, jwtToken = new JwtSecurityTokenHandler().WriteToken(token) };
+            #endregion
+        }
+        [Authorize]
+        [HttpGet("/testapi")]
+        public object TestApi()
+        {
+            return new ReturnMessage(data: "api string");
+        }
+        
+
 
 
 

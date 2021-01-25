@@ -18,6 +18,11 @@ namespace TCYDMWebServices.Data
         public DbSet<OnlineQuery> OnlineQueries { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Gender> Genders { get; set; }
+        public DbSet<WhatWeDo> WhatWeDos { get; set; }
+        public DbSet<WhoWeAre> WhoWeAres { get; set; }
+        public DbSet<ContactUs> ContactUss { get; set; }
+        public DbSet<Langluage> Languages { get; set; }
+   
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
