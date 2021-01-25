@@ -8265,19 +8265,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Orxan\\.nuget\\packages\\": {}
+    "C:\\Users\\Isi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Orxan\\source\\repos\\tydmbproj\\TCYDMWebServices\\TCYDMWebServices\\TCYDMWebServices.csproj",
+      "projectUniqueName": "D:\\Desktop\\MyProjects\\tydmbproj\\TCYDMWebServices\\TCYDMWebServices\\TCYDMWebServices.csproj",
       "projectName": "TCYDMWebServices",
-      "projectPath": "C:\\Users\\Orxan\\source\\repos\\tydmbproj\\TCYDMWebServices\\TCYDMWebServices\\TCYDMWebServices.csproj",
-      "packagesPath": "C:\\Users\\Orxan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Orxan\\source\\repos\\tydmbproj\\TCYDMWebServices\\TCYDMWebServices\\obj\\",
+      "projectPath": "D:\\Desktop\\MyProjects\\tydmbproj\\TCYDMWebServices\\TCYDMWebServices\\TCYDMWebServices.csproj",
+      "packagesPath": "C:\\Users\\Isi\\.nuget\\packages\\",
+      "outputPath": "D:\\Desktop\\MyProjects\\tydmbproj\\TCYDMWebServices\\TCYDMWebServices\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Orxan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Isi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8350,7 +8350,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
       }
     }
   },
