@@ -1,0 +1,48 @@
+﻿
+
+<form asp-action="SetLanguage" asp-controller="Home">
+    <div  class="text-danger"></div>
+    <div class="form-group">
+
+        <select name="culture" class="form-control">
+            @if (@Context.Request.Cookies["LangKey"] == null)
+            {
+                <option selected value="1">en </option>
+                <option  value="2">ru </option>
+            }
+            else
+            {
+                if (@Context.Request.Cookies["LangKey"] == "2")
+                {
+                    <option selected value="2">ru </option>
+                }
+                else
+                {
+                    <option value="2">ru </option>
+                }
+                if (@Context.Request.Cookies["LangKey"] == "1")
+                {
+                    <option selected value="1">en </option>
+                }
+                else
+                {
+                    <option value="1">en </option>
+                }
+            }
+
+
+
+
+
+
+
+
+        </select>
+        <input type="hidden" name="returnurl" value="@Context.Request.Path" />
+
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>

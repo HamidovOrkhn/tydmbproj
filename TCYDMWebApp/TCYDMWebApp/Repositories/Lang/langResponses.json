@@ -1,0 +1,35 @@
+﻿{
+  "en": {
+    "NotFound": "Cannot find this type of data",
+    "Internal": "There is problem with server, please try again",
+    "ValidationFailed": "Wrong credentials",
+    "AlreadyExists": "This credentials are already exists, please try another one",
+    "WrongPassword": "Password is wrong",
+    "WrongUser": "There is no such user with this credentials"
+
+
+
+  },
+  "ru": {
+
+
+  },
+  "tr": {
+
+
+  },
+  "az": {
+    "NotFound": "Cann",
+    "Internal": "There is problem with",
+    "ValidationFailed": "Wronls",
+    "AlreadyExists": "This credts, please try another one",
+    "WrongPassword": "Passwong",
+    "WrongUser": "Theuser with this credentials"
+
+  },
+  "ar": {
+
+
+  }
+
+}
