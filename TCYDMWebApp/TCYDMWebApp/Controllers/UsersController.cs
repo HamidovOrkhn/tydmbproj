@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,13 +22,16 @@ namespace TCYDMWebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _configuration;
-        IStringLocalizer<SharedResource> _localizer;
+        private readonly IStringLocalizer<SharedResource> _localizer;
+        private readonly IHttpClientFactory _fc;
 
-        public UsersController(ILogger<HomeController> logger, IConfiguration config, IStringLocalizer<SharedResource> localizer)
+
+        public UsersController(ILogger<HomeController> logger, IConfiguration config, IStringLocalizer<SharedResource> localizer,IHttpClientFactory client)
         {
             _logger = logger;
             _configuration = config;
             _localizer = localizer;
+            _fc = client;
         }
 
 
@@ -44,7 +48,7 @@ namespace TCYDMWebApp.Controllers
             UserLogin user = new UserLogin();
             user.Identification = request.Identification; 
             user.Password = request.Password;
-            ServiceNode<UserLogin, LoginRespDTO> client = new ServiceNode<UserLogin, LoginRespDTO>(_configuration["Api-Key"],_localizer);
+            ServiceNode<UserLogin, LoginRespDTO> client = new ServiceNode<UserLogin, LoginRespDTO>(_localizer, _fc);
             ReturnMessage<LoginRespDTO> response = client.PostClient(request, "/api/v1/users/login");
             if (response.IsCatched == 1)
             {

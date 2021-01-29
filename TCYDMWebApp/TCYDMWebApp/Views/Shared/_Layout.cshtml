@@ -1,83 +1,243 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - GlobalApp</title>
+﻿@*@using TCYDMWebApp.Resources
+    @inject LocService SharedLocalizer*@
+@using Microsoft.AspNetCore.Mvc.Localization
+@using TCYDMWebApp.Repositories.Lang
+@model TCYDMWebApp.ViewModels.IndexViewModel
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@*@RenderBody()
+
+@await Html.PartialAsync("_SelectLanguagePartial")*@
+<!doctype html>
+<html>
+
+<head>
+
+
+    <meta charset="utf-8" lang="en">
+    <meta name="viewport" content="width=device-width initial-scale=1 shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+          integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+          crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css"
+          integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g=="
+          crossorigin="anonymous" />
+    <link rel="stylesheet" href="~/indexlayout/css/style.css">
+    <title>@ViewData["Title"] - @SharedLocalizer["REGISTRATION"]</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">GlobalApp</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
+    <header>
+        <div class="title">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2 logo">
+                        <div class="call-res">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="mm">
+                                        <img class="phone-call" src="~/indexlayout/logo/phone-call.svg">
+                                        <span class="number">*1010</span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <h2 class="registr-sm"><a href="">@SharedLocalizer["REGISTRATION"]</a></h2>
+                                </div>
+                            </div>
+                        </div>
+
+                        <img class="logo-img" src="~/indexlayout/logo/logo.png">
+
+                        <div class="intro dropdown d-none show">
+                            <button class="btn menu-btn" type="button" id="dropdownMenuButton">
+                                <img src="~/indexlayout/logo/world (1).svg">Az
+                                <i class="fas fa-angle-down"></i>
+                            </button>
+                            <div class="dropdown-menu nonscroll-menu ">
+                                <a class="dropdown-item" href="#">Az</a>
+                                <a class="dropdown-item" href="#">Eng</a>
+                                <a class="dropdown-item" href="#">Rus</a>
+                            </div>
+                            <div class="call">
+                                <img src="~/indexlayout/logo/phone-call.svg">
+                                <span class="number">*1010</span>
+                            </div>
+                            <div class="size">
+                                <i class="fas fa-bars ml-2  mt-2"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-8">
+                        <ul class="nav">
+                            <li><a href="">@SharedLocalizer["WHO WE ARE"]</a></li>
+                            <li><a href="">@SharedLocalizer["WHAT WE DO"]</a></li>
+
+                            <li class="dropdown-s">
+                                <a href="">@SharedLocalizer["OUR SERVICES"] <i class="fas fa-angle-down"></i></a>
+                                <ul class="dropdown-menu-s " role="menu">
+                                    @foreach (var item in Model.Services)
+                                    {
+                                        <li><a href="#">@item.Name</a></li>
+                                    }
+
+                                </ul>
+                            </li>
+                            <li><a href="">@SharedLocalizer["CONTACT US"]</a></li>
+                            <li class="registr-a-tag"><a href="">@SharedLocalizer["REGISTRATION"]</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="intro dropdown  hide">
+                            <form asp-action="SetLanguage" asp-controller="Home" id="lngform">
+                                <select name="culture" class="form-select form-select-sm lng" style="outline: none; padding:3px;border-top: none;border-bottom: none;">
+                                    @if (@Context.Request.Cookies["LangKey"] == null)
+                                    {
+                                        <option selected value="1">en </option>
+                                        <option value="2">ru </option>
+                                    }
+                                    else
+                                    {
+                                        if (@Context.Request.Cookies["LangKey"] == "2")
+                                        {
+                                            <option selected value="2">ru </option>
+                                        }
+                                        else
+                                        {
+                                            <option value="2">ru </option>
+                                        }
+                                        if (@Context.Request.Cookies["LangKey"] == "1")
+                                        {
+                                            <option selected value="1">en </option>
+                                        }
+                                        else
+                                        {
+                                            <option value="1">en </option>
+                                        }
+                                    }
+
+
+
+
+
+
+
+
+                                </select>
+                                <input type="hidden" name="returnurl" value="@Context.Request.Path" />
+                            </form>
+
+                        </div>
+                        <div class="call ">
+                            <img src="~/indexlayout/logo/phone-call.svg">
+                            <a href="tel:*1010" class="number">*1010</a>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </nav>
-
-    <partial name="_CookieConsentPartial" />
-
-    <div class="container body-content">
-        @RenderBody()
-        
-            @await Html.PartialAsync("_SelectLanguagePartial")
-       
-        <hr />
-        <footer>
-            @{ string year = DateTime.Now.Year.ToString(); }
+        <div class="first-hd">
             <div class="row">
-                <div class="col-sm-6">
-                    <p>&copy; @year - Adding Localization</p>
+                <div class="col-4 disable"> </div>
+                <div class="col-4 operate-div">
+                    <h4 class="operate-clas">@SharedLocalizer["WE OPERATE 24/7"]</h4>
                 </div>
-
+                <div class="col-4 right-div">
+                    <button type="button" class="online-btn">@SharedLocalizer["Online query"]</button>
+                </div>
             </div>
-        </footer>
-    </div>
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
 
+        </div>
+    </header>
+    <section>
+        <div class="container">
+            @RenderBody()
+        </div>
+    </section>
+    <footer class="info">
+        <div class="container">
+            <div class="info-footer">
+                <div class="row ">
+                    <div class="col-lg-3 col-md-12 services-center">
+                        <a href="#">@SharedLocalizer["WHO WE ARE"]</a>
+                        <a href="#">@SharedLocalizer["WHAT WE DO"]</a>
+                        <a href="#">@SharedLocalizer["CONTACT US"]</a>
+                        <address class="address">
+                            <span>@SharedLocalizer["Email"]: </span><a href="#">@Model.ContactUs.Email</a> <br>
+                            <span>@SharedLocalizer["Mobile"]:</span><a href="">@Model.ContactUs.Phone</a><br>
+                            <span>@SharedLocalizer["Adress"]:</span><a href="">@Model.ContactUs.Adress</a>
+                        </address>
+                        <img src="~/indexlayout/logo/640px-Google_Play_Store_badge_EN.svg.png">
+                        <img src="~/indexlayout/logo/download-on-app-store-png-click-the-qr-code-to-show-the-download-link-800-1.png">
+                    </div>
+                    <div class="col-lg-9 col-md-12 services-center ">
+                        <a href="#">@SharedLocalizer["OUR SERVICES"]</a>
+                        <div class="row">
+                            @{int count = Model.Services.Count / 3; }
+                            <div class="col-lg-4 col-md-12 services-center">
+                                <ul class="info-ul">
+                                    @for (int i = 0; i < count + 1; i++)
+                                    {
+                                        <li><a href="">@Model.Services[i].Name</a></li>
+                                    }
+
+                                </ul>
+                            </div>
+                            <div class="col-lg-4 col-md-12 services-center ">
+                                <ul class="info-ul">
+                                    @for (int i = count + 1; i < (count + 1) * 2; i++)
+                                    {
+                                        <li><a href="">@Model.Services[i].Name</a></li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="col-lg-4 col-md-12 services-center">
+                                <ul class="info-ul">
+                                    @for (int i = (count + 1) * 2; i <= count * 3; i++)
+                                    {
+                                        <li><a href="">@Model.Services[i].Name</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="social">
+                    <hr>
+                    <div class="row">
+                        <div class="col-12 text-center d-flex flex-row justify-content-center">
+                            <a class="p-2" href=""><img src="~/indexlayout/logo/fb.svg" alt=""></a>
+                            <a class="p-2" href=""><img src="~/indexlayout/logo/tl.svg" alt=""></a>
+                            <a class="p-2" href=""><img src="~/indexlayout/logo/ins.svg" alt=""></a>
+                            <a class="p-2" href=""><img src="~/indexlayout/logo/yt.svg" alt=""></a>
+                            <a class="p-2" href=""><img src="~/indexlayout/logo/tl (2).svg" alt=""></a>
+                        </div>
+                        <div class="col-12 text-center">
+                            <p>
+                                &copy; @SharedLocalizer["Support to the Republic of Turkey Foreign Center"]. @SharedLocalizer["All rights reserved"].
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </footer>
+    <script src="~/indexlayout/js/main.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".lng").change(function () {
+                $("#lngform").submit();
+            })
+        })
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
+
+
+
 </html>

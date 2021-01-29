@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,7 +15,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Polly;
 using TCYDMWebApp.Repositories.Lang;
+using TCYDMWebApp.Resources;
 
 namespace TCYDMWebApp
 {
@@ -31,30 +34,39 @@ namespace TCYDMWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddMvc().AddNewtonsoftJson()
-            .AddDataAnnotationsLocalization(options => {
-            options.DataAnnotationLocalizerProvider = (type, factory) =>
-                factory.Create(typeof(SharedResource));
-        });
-            
-            services.Configure<RequestLocalizationOptions>(opts => {
-                var supportedCultures = new List<CultureInfo> {
-                    new CultureInfo("en"),
-                    new CultureInfo("en-US"),
-                    new CultureInfo("fr"),
-                    new CultureInfo("ru"),
-                    new CultureInfo("ja"),
-                    new CultureInfo("fr-FR"),
-                    new CultureInfo("zh-CN"),   // Chinese China
-                    new CultureInfo("ar-EG"),   // Arabic Egypt
-                  };
+            services.AddSingleton<LocService>();
+        //    services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-                opts.DefaultRequestCulture = new RequestCulture("en-US");
-                // Formatting numbers, dates, etc.
-                opts.SupportedCultures = supportedCultures;
-                // UI strings that we have localized.
-                opts.SupportedUICultures = supportedCultures;
-            });
+            services.AddMvc()
+                .AddViewLocalization()
+                .AddDataAnnotationsLocalization(options => {
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                        factory.Create(typeof(SharedResource));
+                });
+            services.AddHttpClient(name:"ApiRequests", option=> {
+                option.BaseAddress = new Uri("http://localhost:5000");
+            }).AddTransientHttpErrorPolicy(x => x.WaitAndRetryAsync(3,_=>TimeSpan.FromMilliseconds(300)));
+            
+
+
+            services.Configure<RequestLocalizationOptions>(
+        options =>
+        {
+            var supportedCultures = new List<CultureInfo>
+                {
+                    new CultureInfo("en-US"),
+                    new CultureInfo("de-CH"),
+                    new CultureInfo("fr-CH"),
+                    new CultureInfo("it-CH"),
+                    new CultureInfo("ru")
+                };
+
+            options.DefaultRequestCulture = new RequestCulture(culture: "en-US", uiCulture: "en-US");
+            options.SupportedCultures = supportedCultures;
+            options.SupportedUICultures = supportedCultures;
+
+            options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
+        });
             services.AddSession();
         }
 

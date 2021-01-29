@@ -1,16 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using TCYDMWebServices.Repositories;
-using System.IO;
-using Newtonsoft.Json.Linq;
-using TCYDMWebApp.DTO;
 using Microsoft.Extensions.Localization;
 using TCYDMWebApp.Repositories.Lang;
+using Microsoft.AspNetCore.Components;
 
 namespace TCYDMWebApp.Libs
 {
@@ -19,21 +15,17 @@ namespace TCYDMWebApp.Libs
         public string BaseAdress { get; set; }
 
         IStringLocalizer<SharedResource> _localizer;
+
         HttpClient Client;
-        public ServiceNode(string Baseadress)
-        {
-            this.BaseAdress = Baseadress;
-            Client = new HttpClient();
-            Client.BaseAddress = new Uri(BaseAdress);
 
+        public ServiceNode(IHttpClientFactory factory)
+        {
+            Client = factory.CreateClient(name:"ApiRequests");
         }
-        public ServiceNode(string Baseadress, IStringLocalizer<SharedResource> localizer)
+        public ServiceNode(IStringLocalizer<SharedResource> localizer, IHttpClientFactory factory)
         {
-            this.BaseAdress = Baseadress;
-            Client = new HttpClient();
-            Client.BaseAddress = new Uri(BaseAdress);
+            Client = factory.CreateClient(name: "ApiRequests");
             _localizer = localizer;
-
         }
         public ReturnMessage<U> DeleteClient(string url, string token = null)
         {

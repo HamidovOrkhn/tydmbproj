@@ -27,10 +27,10 @@ namespace TCYDMWebServices.Controllers.V1
             _wwd = wwd;
             _db = db;
         }
-        [HttpGet(" ContactUsGet")]
-        public IActionResult ContactUsGet()
+        [HttpGet("ContactUsGet/{languageId}")]
+        public IActionResult ContactUsGet(int languageId)
         {
-            return Ok(_db.ContactUss.ToList());
+            return Ok(new ReturnMessage(_db.ContactUss.Where(a => a.LanguageId == languageId).FirstOrDefault()));
         }
 
         [HttpPost("ContactUsAdd")]
