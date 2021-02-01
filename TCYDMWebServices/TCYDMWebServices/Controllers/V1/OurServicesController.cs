@@ -30,7 +30,12 @@ namespace TCYDMWebServices.Controllers.V1
         [HttpGet("OurServicesGet/{langId}")]
         public IActionResult OurServicesGet(int langId)
         {
-            return Ok( new ReturnMessage(data: _db.Services.Where(a => a.LanguageId == langId).ToList()));
+            return Ok( new ReturnMessage(data: _db.Services.Where(a => a.LanguageId == langId).ToList().OrderBy(a=>a.ServiceId)));
+        }
+        [HttpGet("OurServicesGetById/{serviceId}/{langId}")]
+        public IActionResult GetServiceById(int serviceId,int langId)
+        {
+            return Ok(new ReturnMessage(_db.Services.Where(a => a.LanguageId == langId && a.ServiceId == serviceId).FirstOrDefault()));
         }
 
         [HttpPost("OurServicesAdd")]

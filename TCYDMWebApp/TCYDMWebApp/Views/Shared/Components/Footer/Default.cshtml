@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<TCYDMWebApp.DTO.OurServicesDTO>
+<div class="col-lg-4 col-md-12 services-center">
+    @{int count = Model.Count / 3; }
+    <ul class="info-ul">
+        @for (int i = 0; i < count + 1; i++)
+        {
+            <li><a href="/home/services/@Model[i].ServiceId">@Model[i].Name</a></li>
+        }
+
+    </ul>
+</div>
+<div class="col-lg-4 col-md-12 services-center ">
+    <ul class="info-ul">
+        @for (int i = count + 1; i < (count + 1) * 2; i++)
+        {
+            <li><a href="/home/services/@Model[i].ServiceId">@Model[i].Name</a></li>
+        }
+    </ul>
+</div>
+<div class="col-lg-4 col-md-12 services-center">
+    <ul class="info-ul">
+        @for (int i = (count + 1) * 2; i <= count * 3; i++)
+        {
+            <li><a href="/home/services/@Model[i].ServiceId">@Model[i].Name</a></li>
+        }
+    </ul>
+</div>

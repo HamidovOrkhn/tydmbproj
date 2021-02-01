@@ -26,68 +26,108 @@ namespace TCYDMWebApp.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _configuration;
         private readonly IStringLocalizer<SharedResource> _localizer;
-        private readonly IHttpClientFactory _fc;
+        private readonly HttpClient _fc;
 
         public HomeController(ILogger<HomeController> logger, IConfiguration config, IStringLocalizer<SharedResource> localizer, IHttpClientFactory fc)
         {
             _logger = logger;
             _configuration = config;
             _localizer = localizer;
-            _fc = fc;
+            _fc = fc.CreateClient(name: "ApiRequests");
 
         }
-      
-        [TestFilter]
-        public IActionResult Test1()
-        {
-            return Ok(Request.Cookies["TestCookie"]);
-        }
+ 
        
         public IActionResult Index()
         {
+            return View();
+        }
+
+        [HttpGet("/home/services/{serviceId}")]
+        public IActionResult ServiceInfo(int serviceId)
+        {
+            #region ServiceData
+                        int langId = 1;
+
+                        if (Request.Cookies["LangKey"] != null)
+                        {
+                            langId = Convert.ToInt32(Request.Cookies["LangKey"]);
+                        }
+                        OurServicesDTO prms = new OurServicesDTO();
+                        ServiceInfo service = new ServiceInfo();
+                        Task tsk1 = Task.Factory.StartNew(() =>
+                        {
+                            prms = new ServiceNode<object, OurServicesDTO>(_fc)
+                           .GetClient("/api/v1/OurServices/OurServicesGetById/"+ serviceId +"/" + langId).Data;
+                        });
+                        Task tsk2 = Task.Factory.StartNew(() =>
+                        {
+                            service = new ServiceNode<object, ServiceInfo>(_fc)
+                           .GetClient("/api/v1/serviceinfo/get/"+serviceId+"/" + langId).Data;
+                        });
+                        Parallel.Invoke();
+                        tsk1.Wait();
+                        tsk2.Wait();
+                        ServiceInfoViewModel model = new ServiceInfoViewModel();
+                        model.ServiceInfo = service;
+                        model.ServiceParams = prms;
+                        #endregion
+            return View("ServiceInfo", model);
+        }
+
+        [HttpGet]
+        public IActionResult WhatWeDo()
+        {
+            #region ServiceData
             int langId = 1;
-           
-            if (Request.Cookies["LangKey"]!= null)
+
+            if (Request.Cookies["LangKey"] != null)
             {
                 langId = Convert.ToInt32(Request.Cookies["LangKey"]);
             }
-            List<OurServicesDTO> services = new List<OurServicesDTO>();
-            ContactUsDTO contactus = new ContactUsDTO();
-            Task tsk1 = Task.Factory.StartNew(() =>
-            {
-                 services = new ServiceNode<object, List<OurServicesDTO>>(_fc)
-                .GetClient("/api/v1/OurServices/OurServicesGet/" + langId).Data;
-            });
-            Task tsk2 = Task.Factory.StartNew(() =>
-            {
-                 contactus = new ServiceNode<object, ContactUsDTO>(_fc)
-                .GetClient("/api/v1/ContactUs/ContactUsGet/" + langId).Data;
-            });
-            Parallel.Invoke();
-            tsk1.Wait();
-            tsk2.Wait();
-            IndexViewModel model = new IndexViewModel();
-            model.ContactUs = contactus;
-            model.Services = services;
 
+            WhatWeDoDTO model = new ServiceNode<object, WhatWeDoDTO>(_fc)
+                   .GetClient("/api/v1/WhatWeDo/WhatWeDoGet/"+langId).Data;
+
+            #endregion
+            return View(model);     
+        }
+
+        [HttpGet]
+        public IActionResult WhoWeAre()
+        {
+            #region ServiceData
+            int langId = 1;
+
+            if (Request.Cookies["LangKey"] != null)
+            {
+                langId = Convert.ToInt32(Request.Cookies["LangKey"]);
+            }
+
+            WhoWeAreDTO model = new ServiceNode<object, WhoWeAreDTO>(_fc)
+                   .GetClient("/api/v1/WhoWeAre/WhoWeAreGet/" + langId).Data;
+
+            #endregion
             return View(model);
         }
-        /// <summary>
-        /// SILMEYIN
-        /// </summary>
-        /// <returns></returns>
-        public IActionResult Logout()
+
+        [HttpGet]
+        public IActionResult ContactUs()
         {
-            Response.Cookies.Delete("refreshToken");
-            Response.Cookies.Delete("jwtToken");
-            Response.Cookies.Delete("UserKey");
-            Response.Cookies.Delete("TestCookie");
-            return Ok("loggged out");
+            #region ServiceData
+            int langId = 1;
+
+            if (Request.Cookies["LangKey"] != null)
+            {
+                langId = Convert.ToInt32(Request.Cookies["LangKey"]);
+            }
+
+            ContactUsDTO model = new ServiceNode<object, ContactUsDTO>(_fc)
+           .GetClient("/api/v1/ContactUs/ContactUsGet/" + langId).Data;
+
+            #endregion
+            return View(model);
         }
-        /// <summary>
-        /// SILMEYIN
-        /// </summary>
-        /// <returns></returns>
         [RefreshApiToken]
         public IActionResult Privacy()
         {
@@ -95,11 +135,7 @@ namespace TCYDMWebApp.Controllers
             ViewData["apistring"] = data.Data;
             return View();
         }
-        /// <summary>
-        /// SILMEYIN
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
+
         [HttpPost]
         public IActionResult SetLanguage([FromForm] LangDTO request)
         {

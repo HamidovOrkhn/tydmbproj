@@ -1,0 +1,18 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using TCYDMWebApp.Repositories.Lang
+@model TCYDMWebApp.DTO.ContactUsDTO
+
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+<a href="#"style="text-transform:uppercase">@SharedLocalizer["WHO WE ARE"]</a>
+<a href="#"style="text-transform:uppercase">@SharedLocalizer["What We Do"]</a>
+<a href="#"style="text-transform:uppercase">@SharedLocalizer["Contact us"]</a>
+<address class="address">
+    <span>@SharedLocalizer["Email"]: </span><a href="mailto:@Model.Email">@Model.Email</a> <br>
+    <span>@SharedLocalizer["Mobile"]:</span><a href="tel:@Model.Phone">@Model.Phone</a><br>
+    <span>@SharedLocalizer["Adress"]:</span><a href="http://maps.google.com/?q=@Model.Adress">
+        @Model.Adress
+    </a>
+</address>
+<img src="~/homelayout/logo/640px-Google_Play_Store_badge_EN.svg.png">
+<img src="~/homelayout/logo/download-on-app-store-png-click-the-qr-code-to-show-the-download-link-800-1.png">

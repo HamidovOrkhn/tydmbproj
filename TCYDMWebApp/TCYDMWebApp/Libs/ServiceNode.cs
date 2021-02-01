@@ -18,13 +18,15 @@ namespace TCYDMWebApp.Libs
 
         HttpClient Client;
 
-        public ServiceNode(IHttpClientFactory factory)
+        public ServiceNode(HttpClient factory)
         {
-            Client = factory.CreateClient(name:"ApiRequests");
+            //Client = factory.CreateClient(name:"ApiRequests");
+            Client = factory;
         }
-        public ServiceNode(IStringLocalizer<SharedResource> localizer, IHttpClientFactory factory)
+        public ServiceNode(IStringLocalizer<SharedResource> localizer, HttpClient factory)
         {
-            Client = factory.CreateClient(name: "ApiRequests");
+            // Client = factory.CreateClient(name: "ApiRequests");
+            Client = factory;
             _localizer = localizer;
         }
         public ReturnMessage<U> DeleteClient(string url, string token = null)

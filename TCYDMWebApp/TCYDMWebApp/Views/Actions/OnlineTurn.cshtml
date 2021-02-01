@@ -1,0 +1,170 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using Microsoft.AspNetCore.Mvc.Localization
+@using TCYDMWebApp.Repositories.Lang
+
+
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@model TCYDMWebApp.ViewModels.ServiceInfoViewModel
+<div class="sign-up">
+    <h2>@SharedLocalizer["Online query"]</h2>
+    <div class="sign-hr"></div>
+    <hr class="hr-s">
+    <div class="online-service">
+        <div class="row">
+            <div class="col-lg-4 col-md-12 ">
+                <h5>SERVIS</h5>
+
+                <div class="form-group">
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option selected>@SharedLocalizer["Select Service"]</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-6  ">
+                        <div class="form-group">
+                            <input type="date" />
+                        </div>
+                    </div>
+                    <div class="col-6 elemet-wiz eni ">
+                        <div class="form-group">
+                            <input type="time" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Comments" id="floatingTextarea2"
+                              style="height: 100px">
+
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12">
+                <h5>Şəxsİ məlumatlar</h5>
+                <div class="form-group">
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option selected>@SharedLocalizer["Select Country"]</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option selected>@SharedLocalizer["Select Region"]</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ad">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ad">
+                </div>
+
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <select style="width: 100%;" class="form-control "
+                                    id="exampleFormControlSelect1">
+                                <option>Novbetinin Tarixi</option>
+                                <option>kisi</option>
+                                <option>qadin</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <select style="width: 100%;" class="form-control "
+                                    id="exampleFormControlSelect1">
+                                <option>Novbetinin Saati</option>
+                                <option>kisi</option>
+                                <option>qadin</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ad">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ad">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ad">
+
+                </div>
+                <button class="button-sign">Daxil ol</button>
+
+
+                <div class="p-box">
+                    <p>
+                        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                        doloremque.
+                    </p>
+                </div>
+                <div class="p-red-box">
+                    <p>
+                        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                        doloremque.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="lorem-text-account">
+                    <h4>Lorem ipsum dolor sit amet,<br> consectetur adipiscing elit</h4>
+                    <div class="row">
+
+                        <div class="col-2">
+                            <div class="first-dot"></div>
+                            <div class="dot-circle"></div>
+                            <hr class="vr">
+                            <div class="second-dot"></div>
+                            <div class="second-dot-circle"></div>
+                            <div class="third-dot"></div>
+                            <div class="third-dot-circle"></div>
+                        </div>
+                        <div class="col-10">
+
+
+                            <p>
+                                "Sed ut perspiciatis unde omnis iste natusb error sit voluptatem accusantium
+                                doloremque laudantium, totam rem aperiam.
+                            </p>
+
+                            <p>
+                                "But I must explain to you how all this mistaken idea of denouncing pleasure
+                                and praising pain was born and I will give you a complete account of the
+                                system, and expound the actual teachings of the great explorer
+                                of the truth, the master-builder of human happiness.
+                            </p>
+                            <p>
+                                "Sed ut perspiciatis undeiste natus error sit voluptatem accusantium
+                                doloremque laudantium, totam rem.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

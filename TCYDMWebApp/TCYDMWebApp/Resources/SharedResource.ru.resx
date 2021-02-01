@@ -126,8 +126,8 @@
   <data name="Cannot find this type of data" xml:space="preserve">
     <value>Не могу найти этот тип данных</value>
   </data>
-  <data name="CONTACT US" xml:space="preserve">
-    <value>СВЯЗАТЬСЯ С НАМИ</value>
+  <data name="Contact us" xml:space="preserve">
+    <value>Свяжитесь с нами</value>
   </data>
   <data name="Country is required" xml:space="preserve">
     <value>Страна обязательна</value>
@@ -144,8 +144,17 @@
   <data name="Email or Phone number max length must be 100" xml:space="preserve">
     <value>Вы должны ввести адрес электронной почты или пароль</value>
   </data>
+  <data name="Forgot Password" xml:space="preserve">
+    <value>Забыли пароль</value>
+  </data>
   <data name="Gender is required" xml:space="preserve">
     <value>Пол обязательно</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>логин</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Выйти</value>
   </data>
   <data name="Max lenght limit is 200" xml:space="preserve">
     <value>Максимальная длина - 200</value>
@@ -165,8 +174,8 @@
   <data name="Online query" xml:space="preserve">
     <value>Онлайн-запрос</value>
   </data>
-  <data name="OUR SERVICES" xml:space="preserve">
-    <value>НАШИ СЕРВИСЫ</value>
+  <data name="Our Services" xml:space="preserve">
+    <value>наши сервисы</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Ваш пароль</value>
@@ -195,8 +204,8 @@
   <data name="Region is required" xml:space="preserve">
     <value>Требуется регион</value>
   </data>
-  <data name="REGISTRATION" xml:space="preserve">
-    <value>РЕГИСТРАЦИЯ</value>
+  <data name="Registration" xml:space="preserve">
+    <value>регистрация</value>
   </data>
   <data name="Remember me" xml:space="preserve">
     <value>Запомни меня</value>
@@ -212,6 +221,9 @@
   </data>
   <data name="Select Region" xml:space="preserve">
     <value>Выбрать регион</value>
+  </data>
+  <data name="Sign in" xml:space="preserve">
+    <value>логин</value>
   </data>
   <data name="Support to the Republic of Turkey Foreign Center" xml:space="preserve">
     <value>Поддержка Зарубежного центра Турецкой Республики</value>
@@ -234,8 +246,8 @@
   <data name="WE OPERATE 24/7" xml:space="preserve">
     <value>МЫ РАБОТАЕМ 24/7</value>
   </data>
-  <data name="WHAT WE DO" xml:space="preserve">
-    <value>ЧТО МЫ ДЕЛАЕМ</value>
+  <data name="What We Do" xml:space="preserve">
+    <value>Что мы делаем</value>
   </data>
   <data name="WHO WE ARE" xml:space="preserve">
     <value>КТО МЫ ЕСТЬ</value>

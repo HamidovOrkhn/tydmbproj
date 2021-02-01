@@ -16,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 using Prometheus;
 using TCYDMWebServices.Data;
 using TCYDMWebServices.DTO;
+using TCYDMWebServices.Models;
 using TCYDMWebServices.Repositories.Abstracts;
 using TCYDMWebServices.Repositories.Repos;
 
@@ -38,6 +39,7 @@ namespace TCYDMWebServices
             services.AddTransient<ITransactions<UserDTO>,UserRepos>();
             services.AddTransient<ITransactions<OnlineQueryDTO>, OnlineQueryRepos>();
             services.AddTransient<ITransactions<WhatWeDoDTO>, WhatWeDoRepos>();
+            services.AddTransient<ITransactions<ServiceInfo>, ServiceInfoRepos>();
             services.AddTransient<ITransactions<WhoWeAreDTO>, WhoWeAreRepos>();
             services.AddTransient<ITransactions<ContactUsDTO>, ContactUsRepos>();
             services.AddTransient<ITransactions<OurServicesDTO>, OurServicesRepos>();

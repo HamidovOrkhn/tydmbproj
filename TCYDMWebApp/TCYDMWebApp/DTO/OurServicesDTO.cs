@@ -14,5 +14,7 @@ namespace TCYDMWebApp.DTO
         public string Name { get; set; }
         [Required]
         public int LanguageId { get; set; }
+        [Required]
+        public int ServiceId { get; set; }
     }
 }

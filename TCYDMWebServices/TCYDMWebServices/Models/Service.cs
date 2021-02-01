@@ -13,5 +13,7 @@ namespace TCYDMWebServices.Models
         [MaxLength(300)]
         public string Name { get; set; }
         public int LanguageId { get; set; }
+        [Required]
+        public int ServiceId { get; set; }
     }
 }

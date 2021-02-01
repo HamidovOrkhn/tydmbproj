@@ -22,7 +22,8 @@ namespace TCYDMWebServices.Data
         public DbSet<WhoWeAre> WhoWeAres { get; set; }
         public DbSet<ContactUs> ContactUss { get; set; }
         public DbSet<Langluage> Languages { get; set; }
-   
+        public DbSet<ServiceInfo> ServiceInfos { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

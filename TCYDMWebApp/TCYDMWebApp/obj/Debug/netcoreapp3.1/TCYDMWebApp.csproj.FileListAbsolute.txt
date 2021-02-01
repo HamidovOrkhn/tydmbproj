@@ -279,3 +279,11 @@ C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\bin\Debug\netcorea
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\bin\Debug\netcoreapp3.1\Polly.Extensions.Http.dll
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\TCYDMWebApp.csproj.CoreCompileInputs.cache
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\TCYDMWebApp.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Users\UserRegistration.cshtml.g.cs
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Navbar\Default.cshtml.g.cs
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Contact\Default.cshtml.g.cs
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Footer\Default.cshtml.g.cs
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Home\ServiceInfo.cshtml.g.cs
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Home\WhatWeDo.cshtml.g.cs
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Home\WhoWeAre.cshtml.g.cs
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Home\ContactUs.cshtml.g.cs

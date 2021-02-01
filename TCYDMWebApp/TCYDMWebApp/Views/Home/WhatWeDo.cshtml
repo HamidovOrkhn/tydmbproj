@@ -1,0 +1,18 @@
+﻿
+@using Microsoft.AspNetCore.Mvc.Localization
+@using TCYDMWebApp.Repositories.Lang
+
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@model TCYDMWebApp.DTO.WhatWeDoDTO
+<div class="our-service">
+
+    <div class="info-service">
+        <div class="text">
+            <h4 style="text-transform:uppercase">@SharedLocalizer["What We Do"] ?</h4>
+            <p>
+                @Model.Content
+            </p>
+
+        </div>
+    </div>
+</div>

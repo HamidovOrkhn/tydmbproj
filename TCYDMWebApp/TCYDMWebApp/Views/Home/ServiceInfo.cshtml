@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using Microsoft.AspNetCore.Mvc.Localization
+@using TCYDMWebApp.Repositories.Lang
+
+
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@model TCYDMWebApp.ViewModels.ServiceInfoViewModel
+<div class="our-service">
+    <div class="banner-content">
+        <a href="/" style="text-transform:capitalize" >@SharedLocalizer["Our Services"]<i class="fas fa-angle-right"></i></a>
+        <p>@Model.ServiceParams.Name</p>
+    </div>
+    <div class="info-service">
+        <div class="text">
+            <h4>@Model.ServiceInfo.Name</h4>
+            <p>
+                @Model.ServiceInfo.Info
+            </p>
+
+        </div>
+    </div>
+</div>

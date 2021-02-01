@@ -6,12 +6,12 @@ using TCYDMWebServices.Repositories;
 
 namespace TCYDMWebApp.Libs
 {
-    public interface IServiceNode
+    public interface IServiceNode<T,U>
     {
-        public ReturnMessage<object> DeleteClient(string url, string token = null);
-        public ReturnMessage<object> GetClient(string url, string token = null);
-        public ReturnMessage<object> PostClient(object data, string url, string token = null);
-        public ReturnMessage<object> PutClient(object data, string url, string token = null);
+        public ReturnMessage<U> DeleteClient(string url, string token = null);
+        public ReturnMessage<U> GetClient(string url, string token = null);
+        public ReturnMessage<U> PostClient(object data, string url, string token = null);
+        public ReturnMessage<U> PutClient(object data, string url, string token = null);
 
     }
 }
