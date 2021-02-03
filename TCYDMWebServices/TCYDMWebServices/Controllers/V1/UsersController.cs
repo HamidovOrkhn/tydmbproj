@@ -18,6 +18,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using TCYDMWebServices.Models;
+using TCYDMWebServices.Lib;
 
 namespace TCYDMWebServices.Controllers.V1
 {
@@ -43,13 +44,8 @@ namespace TCYDMWebServices.Controllers.V1
             _configuration = config;
             _onlineQueryService = onlineRepos;
 
-        }
-       // [Authorize]
-        [HttpGet("test")]
-        public IActionResult Test()
-        {
-            return Ok(Convert.ToInt32(DateTime.Now.Year));
-        }
+        }       
+
         [HttpPost("register")]
         public IActionResult Register([FromBody] UserDTO request)
         {
@@ -65,6 +61,7 @@ namespace TCYDMWebServices.Controllers.V1
                 return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.AlreadyExists, message: "This Phone Number is exists"));
             }
             string hashedPassword = Crypto.HashPassword(request.Password);
+            string pKey = Hasher.EncryptString(request.Password, _configuration["Jwt:Key"]);
             var user = new UserDTO {
                 CountryId = request.CountryId,
                 Email = request.Email,
@@ -73,7 +70,10 @@ namespace TCYDMWebServices.Controllers.V1
                 Password = hashedPassword,
                 PhoneNumber = request.PhoneNumber,
                 RegionId = request.RegionId,
-                TCNo = request.TCNo
+                TCNo = request.TCNo,
+                PKey = pKey,
+                BornYear = request.BornYear,
+                SexId = request.SexId
             };
             bool IsSucceed = _userService.Add(user);
             if (!IsSucceed)
@@ -124,6 +124,7 @@ namespace TCYDMWebServices.Controllers.V1
                 ));
             #endregion
         }
+        [Authorize]
         [HttpPut("update/{Id}")]
         public IActionResult Update([FromBody] UserDTO request, int Id)
         {
@@ -134,12 +135,9 @@ namespace TCYDMWebServices.Controllers.V1
                 return StatusCode(400,new ReturnErrorMessage((int)ErrorTypes.Errors.NotFound));
             }
             string hashed = Crypto.HashPassword(request.Password);
+            string pKey = Hasher.EncryptString(request.Password, _configuration["Jwt:Key"]);
             request.Password = hashed;
-            bool IsUpdated = _userService.Update(request,Id);
-            if (!IsUpdated)
-            {
-                return StatusCode(500,new ReturnErrorMessage((int)ErrorTypes.Errors.Internal));
-            }
+            request.PKey = pKey;
             List<User> alreadyExist = _db.Users.Where(a => a.PhoneNumber == request.PhoneNumber || a.Email == request.Email).ToList();
             if (alreadyExist.Count > 1)
             {
@@ -150,9 +148,15 @@ namespace TCYDMWebServices.Controllers.V1
             {
                 return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.AlreadyExists, message: "This credentials is used by another account"));
             }
+            bool IsUpdated = _userService.Update(request, Id);
+            if (!IsUpdated)
+            {
+                return StatusCode(500, new ReturnErrorMessage((int)ErrorTypes.Errors.Internal));
+            }
             return Ok(new ReturnMessage());
             #endregion
         }
+        [Authorize]
         [HttpPost("online_query")]
         public IActionResult GetOnlineQuery([FromBody] OnlineQueryDTO request)
         {
@@ -218,13 +222,57 @@ namespace TCYDMWebServices.Controllers.V1
             return new TokenResponse { token = user.Token, jwtToken = new JwtSecurityTokenHandler().WriteToken(token) };
             #endregion
         }
-        [Authorize]
-        [HttpGet("/testapi")]
-        public object TestApi()
+        [HttpGet("getuser/{Id}")]
+        public IActionResult GetUser(int Id)
         {
-            return new ReturnMessage(data: "api string");
+            #region FunctionBody
+            var userData = (from user in _db.Users
+                            join region in _db.Regions on user.RegionId equals region.Id
+                            join country in _db.Countries on user.CountryId equals country.Id
+                            join sex in _db.Genders on user.SexId equals sex.Id
+                            where user.Id == Id
+                            select new
+                            {
+                                Region = region.Name,
+                                Country = country.Name,
+                                Name = user.Name,
+                                Surname = user.Surname,
+                                BornYear = user.BornYear,
+                                Sex = sex.Name,
+                                TcNo = user.TCNo,
+                                Email = user.Email,
+                                Phone = user.PhoneNumber
+                            }).FirstOrDefault();
+            return Ok(new ReturnMessage(userData));
+            #endregion
         }
-        
+        [HttpGet("getuser/raw/{Id}")]
+        public IActionResult GetUserRaw(int Id)
+        {
+            #region FunctionBody
+            User user = _db.Users.Where(a => a.Id == Id).FirstOrDefault();
+            if (user==null)
+            {
+                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.NotFound));
+            }
+            try
+            {
+                user.Token = null;
+                string decryptedPkey = Hasher.DecryptString(user.PKey, _configuration["Jwt:Key"]);
+                user.PKey = null;
+                user.Password = decryptedPkey;
+                return Ok(new ReturnMessage(user));
+            }
+            catch (Exception x)
+            {
+                return StatusCode(500,new ReturnErrorMessage((int)ErrorTypes.Errors.Internal,message:x.Message));
+            }
+            #endregion
+        }
+
+
+
+
 
 
 

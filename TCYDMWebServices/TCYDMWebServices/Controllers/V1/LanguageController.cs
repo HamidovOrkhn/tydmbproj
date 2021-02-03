@@ -23,5 +23,16 @@ namespace TCYDMWebServices.Controllers.V1
         {
             return Ok(new ReturnMessage(data:_lng.Languages.Where(a => a.Id == Id).FirstOrDefault()));
         }
+        [HttpGet("get/country/{langId}")]
+        public IActionResult GetCountry(int langId)
+        {
+            return Ok(new ReturnMessage(_lng.Countries.Where(a => a.LanguageId == langId).ToList()));
+        }
+        [HttpGet("get/region/{langId}")]
+        public IActionResult GetRegion(int langId)
+        {
+            return Ok(new ReturnMessage(_lng.Regions.Where(a => a.LanguageId == langId).ToList()));
+        }
+
     }
 }

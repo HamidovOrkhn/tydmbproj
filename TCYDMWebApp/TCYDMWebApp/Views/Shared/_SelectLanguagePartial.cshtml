@@ -1,5 +1,5 @@
 ﻿<form asp-action="SetLanguage" asp-controller="Home" id="lngform">
-    <select name="culture" class="lng">
+    <select style="text-transform:uppercase;font-weight:bold;" name="culture" class="lng">
         @if (@Context.Request.Cookies["LangKey"] == null)
         {
             <option selected value="1">en</option>

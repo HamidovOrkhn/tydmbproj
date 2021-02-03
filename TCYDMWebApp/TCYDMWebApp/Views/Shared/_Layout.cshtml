@@ -6,182 +6,186 @@
 
 @inject IHtmlLocalizer<SharedResource> SharedLocalizer
 
-        <!doctype html>
-        <html>
+<!doctype html>
+<html>
 
-        <head>
-            <meta charset="utf-8" lang="en">
-            <meta name="viewport" content="width=device-width initial-scale=1 shrink-to-fit=no">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-                  integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
-                  crossorigin="anonymous" />
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css"
-                  integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g=="
-                  crossorigin="anonymous" />
-            <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-            <link rel="stylesheet" href="~/homelayout/css/style.css">
-       
-        </head>
+<head>
+    <meta charset="utf-8" lang="en">
+    <meta name="viewport" content="width=device-width initial-scale=1 shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/mainlayout/css/style.css">
+</head>
 
-        <body>
-            <header>
-                <div class="container mt-2 mb-2">
-                    <!-- PHONE VERSION CONTACT -->
-                    <div class="row phone-version-contact d-none">
-                        <div class="contact-number col-6 col-xs-6 m-auto">
-                            <a href="tel:*1010">
-                                <img src="~/homelayout/logo/phone-call.svg" alt="" width="30">
-                                *1010
-                            </a>
+<body>
+    <header>
+        <div class="container mt-2 mb-2">
+            <!-- PHONE VERSION CONTACT -->
+            <div class="row phone-version-contact d-none">
+                <div class="contact-number col-md-6 col-6 col-xs-6 m-auto">
+                    <a href="tel:*1010">
+                        <img src="~/mainlayout/logo/phone-call.svg" alt="" width="30"> *1010
+                    </a>
+                </div>
+                @if (Context.Request.Cookies["UserKey"] != null)
+                {
+            <div class="col-6 col-xs-6 text-right m-auto">
+                <a asp-controller="Users" asp-action="UserEdit" class="btn-register" style="text-transform:capitalize"><img src="~/mainlayout/logo/user-line.png" alt="logo">@Context.Request.Cookies["name"]</a>
+                <a asp-controller="Users" asp-action="Logout"><img src="~/mainlayout/logo/exit.svg" alt="logo"></a>
+            </div>
+                }
+                else
+                {
+            <div class="col-6 col-xs-6 text-right m-auto">
+                <a asp-action="Login" asp-controller="Users" class="btn-register">@SharedLocalizer["Registration"]</a>
+      
+            </div>
+                }
+
+            </div>
+            <!-- PHONE VERSION CONTACT -->
+            <div class="row">
+                <div class="col-lg-2 col-md-6 col-xs-6 col-6 logo">
+                    <a href="/"><img src="~/mainlayout/logo/logo.png" alt="logo" width="200"></a>
+                </div>
+                <div class="col-lg-8 menu-items m-auto col-md-8 col-8" style="font-size:smaller">
+                    <ul>
+                        <li><a asp-controller="Home" asp-action="WhoWeAre">@SharedLocalizer["WHO WE ARE"]?</a></li>
+                        <li><a asp-controller="Home" asp-action="WhatWeDo" style="text-transform:uppercase">@SharedLocalizer["What We Do"]?</a></li>
+                        <li id="btn-our-services" class="btn-our-services"><a href="#">@SharedLocalizer["Our Services"]<i class="fas fa-angle-down"></i> </a></li>
+
+                        <div id="our-services-menu" class="our-services-menu ">
+                            <ul>
+                                @await Component.InvokeAsync("Navbar")
+                            </ul>
                         </div>
+
+                        <li><a asp-controller="Home" asp-action="ContactUs" style="text-transform:uppercase">@SharedLocalizer["Contact us"]</a></li>
                         @if (Context.Request.Cookies["UserKey"] != null)
                         {
-                            <div class="col-6 col-xs-6 text-right m-auto">
-                                <a asp-action="Logout" asp-controller="Users" class="btn-register">@SharedLocalizer["Logout"]<i class="fas fa-sign-out-alt"></i></a>
-                            </div>
+                            <li> <a asp-controller="Users" asp-action="UserEdit" class="btn-register" style="text-transform:capitalize"><img src="~/mainlayout/logo/user-line.png" alt="logo">@Context.Request.Cookies["name"]</a></li>
+                            <li> <a asp-controller="Users" asp-action="Logout"><img src="~/mainlayout/logo/exit.svg" alt="logo"></a></li>
                         }
                         else
                         {
-                            <div class="col-6 col-xs-6 text-right m-auto">
-                                <a asp-action="Login" asp-controller="Users" class="btn-register">@SharedLocalizer["REGISTRATION"]</a>
-                            </div>
+                            <li><a asp-action="Login" asp-controller="Users" class="btn-register">@SharedLocalizer["Registration"]</a></li>
                         }
-                        
 
-                    </div>
-                    <!-- PHONE VERSION CONTACT -->
+                    </ul>
+
+                    <!-- OUR SERVICES MENU -->
+                    <!-- OUR SERVICES MENU -->
+
+                </div>
+
+                <div class="col-lg-2 col-md-6 col-xs-6 col-6 m-auto">
                     <div class="row">
-                        <div class="col-lg-2 col-md-6 col-xs-6 col-6 logo">
-                            <a href="/"><img src="~/homelayout/logo/logo.png" alt="logo" width="200"></a>
+                        <div class="languages col-lg-5 border-left border-right pl-4 col-8">
+                            <!-- <img src="logo/world (1).svg" alt="logo" id="logo-img"> -->
+                            <i class="fas fa-globe-europe "></i>
+                            @await Html.PartialAsync("_SelectLanguagePartial")
                         </div>
-                        <div class="col-lg-8 menu-items m-auto">
-                            <ul>
-                                <li><a asp-controller="Home" asp-action="WhoWeAre">@SharedLocalizer["WHO WE ARE"]?</a></li>
-                                <li><a asp-controller="Home" asp-action="WhatWeDo" style="text-transform:uppercase">@SharedLocalizer["What We Do"]?</a></li>
-                                <li class="dropdown-s">
-                                    <a href=""style="text-transform:uppercase" >@SharedLocalizer["Our Services"] <i class="fas fa-angle-down"></i></a>
-                                    <ul class="dropdown-menu-s " role="menu">
-                                        @await Component.InvokeAsync("Navbar")
-
-                                    </ul>
-                                </li>
-                                <li><a asp-controller="Home" asp-action="ContactUs" style="text-transform:uppercase">@SharedLocalizer["Contact us"]</a></li>
-                                @if (Context.Request.Cookies["UserKey"] != null)
-                                {
-                                    <li> <a href="#" class="btn-register" style="text-transform:capitalize">@Context.Request.Cookies["name"]</a></li>
-                                    <li> <a asp-controller="Users" asp-action="Logout"><img src="~/homelayout/logo/exit.svg" alt="logo" ></a></li>
-                                }
-                                else
-                                {
-                                    <li><a asp-action="Login" asp-controller="Users" class="btn-register">@SharedLocalizer["REGISTRATION"]</a></li>
-                                }
-
-                            </ul>
+                        <div class="contact-number col-lg-7 col-md-7 col-7">
+                            <a href="tel:*1010" style="font-weight:bold eszkj,lighter">
+                                <img src="~/mainlayout/logo/phone-call.svg" alt="" width="30"> *1010
+                            </a>
                         </div>
-                        <div class="col-lg-2 col-md-6 col-xs-6 col-6 m-auto">
-                            <div class="row">
-                                <div class="languages col-lg-5 border-left border-right pl-4 col-8">
-                                    <img src="~/homelayout/logo/world (1).svg" alt="logo" id="logo-img">
-                                    @await Html.PartialAsync("_SelectLanguagePartial")
-                                </div>
-                                <div class="contact-number col-lg-7">
-                                    <a href="tel:*1010">
-                                        <img src="~/homelayout/logo/phone-call.svg" alt="" width="30">
-                                        *1010
-                                    </a>
-                                </div>
-                                <!-- HAMBURGER MENU BUTTON-->
-                                <div class="hamburger-menu col-4 d-none">
-                                    <a class="btn pt-0" href="javascript:void(0);" class="icon" onclick="navbarOC()">
-                                        <i class="fas fa-bars"></i>
-                                    </a>
-                                </div>
-                                <!-- HAMBURGER MENU BUTTON-->
-                            </div>
+                        <!-- HAMBURGER MENU BUTTON-->
+                        <div class="hamburger-menu col-lg-4 col-md-4  col-4 d-none">
+                            <a class="btn pt-0" href="javascript:void(0);" class="icon" onclick="navbarOC()">
+                                <i class="fas fa-bars"></i>
+                            </a>
+                        </div>
+                        <!-- HAMBURGER MENU BUTTON-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- HAMBURGER MENU -->
+        <div class="topnav">
+            <div id="Mobile-Nav-Links">
+                <a asp-controller="Home" asp-action="WhoWeAre">@SharedLocalizer["WHO WE ARE"]?</a>
+                <a asp-controller="Home" asp-action="WhatWeDo">@SharedLocalizer["What We Do"]?</a>
+                <a asp-controller="Home" asp-action="ContactUs">@SharedLocalizer["Contact us"]</a>
+                <a href="#" id="btn-our-services-mobile">@SharedLocalizer["Our Services"]<i class="fas fa-angle-down"></i> </a>
+                <div id="our-services-menu-mobile" class="our-services-menu-mobile d-none">
+                    <ul>
+                        @await Component.InvokeAsync("Navbar")
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- HAMBURGER MENU -->
+        </div>
+        <div class="first-hd">
+            <div class="row m-0">
+                <div class="col-lg-4 disable"> </div>
+                <div class="col-lg-4 col-md-6 col-xs-6 col-6 operate-div">
+                    <h4 class="operate-clas">@SharedLocalizer["WE OPERATE 24/7"]</h4>
+                </div>
+                @if (Context.Request.Cookies["UserKey"] != null)
+                {
+                    <form asp-controller="Actions" asp-action="OnlineTurn" method="get">
+                        <div class="col-lg-4 col-md-6 col-xs-6 col-6 right-div">
+                            <button type="submit" class="online-btn">@SharedLocalizer["Online query"]</button>
+                        </div>
+                    </form>
+                }
+            </div>
+
+
+        </div>
+    </header>
+    <section>
+        <div class="container">
+            @RenderBody()
+        </div>
+    </section>
+    <footer class="info">
+        <div class="container">
+            <div class="info-footer">
+                <div class="row ">
+                    <div class="col-lg-3 col-md-12 services-center">
+                        @await Component.InvokeAsync("Contact")
+                    </div>
+                    <div class="col-lg-9 col-md-12 services-center ">
+                        <a href="#" style="text-transform:uppercase">@SharedLocalizer["Our Services"]</a>
+                        <div class="row">
+                            @await Component.InvokeAsync("Footer")
                         </div>
                     </div>
                 </div>
-                <!-- HAMBURGER MENU -->
-                <div class="topnav">
-                    <div id="Mobile-Nav-Links">
-                        <a asp-controller="Home" asp-action="WhoWeAre">@SharedLocalizer["WHO WE ARE"]?</a>
-                        <a asp-controller="Home" asp-action="WhatWeDo" style="text-transform:uppercase">@SharedLocalizer["What We Do"]?</a>
-                        <a href="service.html" style="text-transform:uppercase">@SharedLocalizer["Our Services"]</a>
-                        <a asp-controller="Home" asp-action="ContactUs" style="text-transform:uppercase">@SharedLocalizer["Contact us"]</a>
-                    </div>
-                </div>
-                <!-- HAMBURGER MENU -->
-                </div>
-                <div class="first-hd">
-                    <div class="row m-0">
-                        <div class="col-lg-4 disable"> </div>
-                        <div class="col-lg-4 col-md-6 col-xs-6 col-6 operate-div">
-                            <h4 class="operate-clas">@SharedLocalizer["WE OPERATE 24/7"]</h4>
+                <div class="social">
+                    <hr>
+                    <div class="row">
+                        <div class="col-12 text-center d-flex flex-row justify-content-center">
+                            <a class="p-2" href=""><img src="~/mainlayout/logo/fb.svg" alt=""></a>
+                            <a class="p-2" href=""><img src="~/mainlayout/logo/tl.svg" alt=""></a>
+                            <a class="p-2" href=""><img src="~/mainlayout/logo/ins.svg" alt=""></a>
+                            <a class="p-2" href=""><img src="~/mainlayout/logo/yt.svg" alt=""></a>
+                            <a class="p-2" href=""><img src="~/mainlayout/logo/tl (2).svg" alt=""></a>
                         </div>
-                        @if (Context.Request.Cookies["UserKey"] != null)
-                        {
-                            <div class="col-lg-4 col-md-6 col-xs-6 col-6 right-div">
-                                <a asp-action="OnlineTurn" asp-controller="Actions" type="button" class="online-btn">@SharedLocalizer["Online query"]</a>
-                            </div>
-                        }
-                       
-
-
-                    </div>
-
-
-                </div>
-            </header>
-            <section>
-                <div class="container">
-                    @RenderBody()
-                </div>
-            </section>
-            <footer class="info">
-                <div class="container">
-                    <div class="info-footer">
-                        <div class="row ">
-                            <div class="col-lg-3 col-md-12 services-center">
-                                @await Component.InvokeAsync("Contact")
-                            </div>
-                            <div class="col-lg-9 col-md-12 services-center ">
-                                <a href="#" style="text-transform:uppercase">@SharedLocalizer["Our Services"]</a>
-                                <div class="row">
-                                    @await Component.InvokeAsync("Footer")
-                                </div>
-                            </div>
-                        </div>
-                        <div class="social">
-                            <hr>
-                            <div class="row">
-                                <div class="col-12 text-center d-flex flex-row justify-content-center">
-                                    <a class="p-2" href=""><img src="~/homelayout/logo/fb.svg" alt=""></a>
-                                    <a class="p-2" href=""><img src="~/homelayout/logo/tl.svg" alt=""></a>
-                                    <a class="p-2" href=""><img src="~/homelayout/logo/ins.svg" alt=""></a>
-                                    <a class="p-2" href=""><img src="~/homelayout/logo/yt.svg" alt=""></a>
-                                    <a class="p-2" href=""><img src="~/homelayout/logo/tl (2).svg" alt=""></a>
-                                </div>
-                                <div class="col-12 text-center">
-                                    <p>
-                                        &copy; @SharedLocalizer["Support to the Republic of Turkey Foreign Center"]. @SharedLocalizer["All rights reserved"].
-                                    </p>
-                                </div>
-                            </div>
+                        <div class="col-12 text-center">
+                            <p>
+                                &copy; @SharedLocalizer["Support to the Republic of Turkey Foreign Center"]. @SharedLocalizer["All rights reserved"].
+                            </p>
                         </div>
                     </div>
                 </div>
-                </div>
-            </footer>
-            <script src="~/homelayout/js/main.js"></script>
-            <script>
-                $(document).ready(function () {
-                    $(".lng").change(function () {
-                        $("#lngform").submit();
-                    })
-                })
-            </script>
-            @RenderSection("Scripts", required: false)
-        </body>
-        
+            </div>
+        </div>
+        </div>
+    </footer>
+    <script src="~/mainlayout/js/main.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".lng").change(function () {
+                $("#lngform").submit();
+            })
+        })
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
 
-    </html>
+</html>

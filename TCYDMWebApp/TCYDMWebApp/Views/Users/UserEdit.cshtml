@@ -1,0 +1,43 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@if (ViewData["ServerResponseError"] != null)
+{
+    <div class="p-red-box servererror" style="position:absolute;left:5%;top:40%;z-index:2;display:none;">
+        <p style="color:white">@ViewData["ServerResponseError"]</p>
+
+    </div>
+}
+@await Component.InvokeAsync("UserEdit")
+@section Scripts
+{
+    @if (ViewData["ServerResponseError"] != null)
+    {
+        <script>
+            $(".servererror").fadeIn(function () {
+                setTimeout(function () {
+                    $(".servererror").fadeOut();
+                }, 2000);
+            })
+        </script>
+    }
+    <script>
+        $(document).ready(function () {
+            const togglePassword = document.querySelector('.toggle-password');
+            const password = document.querySelector('#password-field');
+            togglePassword.addEventListener('click', function (e) {
+                // toggle the type attribute
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+                // toggle the eye slash icon
+                this.classList.toggle('fa-eye-slash');
+            });
+
+
+        })
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

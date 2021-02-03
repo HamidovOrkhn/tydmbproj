@@ -30,7 +30,8 @@ namespace TCYDMWebServices.Repositories.Repos
                 RegionId = obj.RegionId,
                 TCNo = obj.TCNo,
                 BornYear = obj.BornYear,
-                SexId = obj.SexId
+                SexId = obj.SexId,
+                PKey = obj.PKey
                 
                 });
 
@@ -58,7 +59,8 @@ namespace TCYDMWebServices.Repositories.Repos
                     PhoneNumber = obj.PhoneNumber,
                     RegionId = obj.RegionId,
                     Surname = obj.Surname,
-                    TCNo = obj.TCNo
+                    TCNo = obj.TCNo,
+                    PKey = obj.PKey
                 });
 
                 return true;
@@ -82,6 +84,7 @@ namespace TCYDMWebServices.Repositories.Repos
                 mappeduser.RegionId = user.RegionId;
                 mappeduser.Surname = user.Surname;
                 mappeduser.TCNo = user.TCNo;
+                mappeduser.PKey = user.PKey;
 
                 return mappeduser;
 
@@ -114,6 +117,7 @@ namespace TCYDMWebServices.Repositories.Repos
                 user.RegionId = obj.RegionId;
                 user.BornYear = obj.BornYear;
                 user.SexId = obj.SexId;
+                user.PKey = obj.PKey;
                 _db.SaveChanges();
                 return true;
             }

@@ -39,6 +39,7 @@ namespace TCYDMWebServices.Models
         
         [MaxLength(200)]
         public string Token { get; set; }
+        public string PKey { get; set; }
 
     }
 }

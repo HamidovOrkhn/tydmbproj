@@ -16,8 +16,7 @@ namespace TCYDMWebApp.Filters
     {
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            Console.WriteLine("Middleware Started");
-           
+            Console.WriteLine("Api Token Middleware");       
         }
 
         public void OnActionExecuting(ActionExecutingContext context)
@@ -41,6 +40,13 @@ namespace TCYDMWebApp.Filters
                     }
 
 
+                }
+                else
+                {
+                    if (context.HttpContext.Session.GetString("JwtSession") == null)
+                    {
+                        context.HttpContext.Session.SetString("JwtSession", context.HttpContext.Request.Cookies["jwtToken"]);
+                    }
                 }
             }
             else

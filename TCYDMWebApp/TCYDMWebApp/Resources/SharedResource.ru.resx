@@ -126,6 +126,12 @@
   <data name="Cannot find this type of data" xml:space="preserve">
     <value>Не могу найти этот тип данных</value>
   </data>
+  <data name="Change Profile" xml:space="preserve">
+    <value>Изменить профиль</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Комментарий</value>
+  </data>
   <data name="Contact us" xml:space="preserve">
     <value>Свяжитесь с нами</value>
   </data>
@@ -150,11 +156,17 @@
   <data name="Gender is required" xml:space="preserve">
     <value>Пол обязательно</value>
   </data>
+  <data name="Get Turn" xml:space="preserve">
+    <value>Получить поворот</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>логин</value>
   </data>
   <data name="Logout" xml:space="preserve">
     <value>Выйти</value>
+  </data>
+  <data name="Max lenght is 256" xml:space="preserve">
+    <value>Максимальная длина 256</value>
   </data>
   <data name="Max lenght limit is 200" xml:space="preserve">
     <value>Максимальная длина - 200</value>
@@ -189,6 +201,9 @@
   <data name="Personal ID" xml:space="preserve">
     <value>Персональный идентификационный номер</value>
   </data>
+  <data name="Personal Info" xml:space="preserve">
+    <value>Личная информация</value>
+  </data>
   <data name="Phone number" xml:space="preserve">
     <value>Телефонный номер</value>
   </data>
@@ -198,17 +213,32 @@
   <data name="Phone number must be a valid number" xml:space="preserve">
     <value>Номер телефона должен быть действующим</value>
   </data>
+  <data name="Please select service" xml:space="preserve">
+    <value>Пожалуйста, выберите услугу</value>
+  </data>
+  <data name="Please select service attend date" xml:space="preserve">
+    <value>Пожалуйста, выберите дату посещения услуги</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Профиль</value>
+  </data>
   <data name="Real estate services" xml:space="preserve">
     <value>Риэлторские услуги</value>
   </data>
   <data name="Region is required" xml:space="preserve">
     <value>Требуется регион</value>
   </data>
+  <data name="Registrate" xml:space="preserve">
+    <value>Зарегистрироваться</value>
+  </data>
   <data name="Registration" xml:space="preserve">
     <value>регистрация</value>
   </data>
   <data name="Remember me" xml:space="preserve">
     <value>Запомни меня</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
   </data>
   <data name="Select birth year" xml:space="preserve">
     <value>Выберите год рождения</value>
@@ -221,6 +251,12 @@
   </data>
   <data name="Select Region" xml:space="preserve">
     <value>Выбрать регион</value>
+  </data>
+  <data name="Select Service" xml:space="preserve">
+    <value>Выберите услугу</value>
+  </data>
+  <data name="Service" xml:space="preserve">
+    <value>обслуживание</value>
   </data>
   <data name="Sign in" xml:space="preserve">
     <value>логин</value>

@@ -15,6 +15,7 @@ namespace TCYDMWebApp.DTO
         public int UserId { get; set; }
         [Required]
         public DateTime ServiceDate { get; set; }
+        public DateTime StartDate { get; set; }
         [MaxLength(256)]
         public string Info { get; set; }
     }

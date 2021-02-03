@@ -34,5 +34,6 @@ namespace TCYDMWebServices.DTO
         [Required]
         [MaxLength(200)]
         public string Password { get; set; }
+        public string PKey { get; set; }
     }
 }

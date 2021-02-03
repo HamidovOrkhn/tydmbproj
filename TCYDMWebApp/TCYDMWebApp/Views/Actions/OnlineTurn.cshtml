@@ -8,163 +8,128 @@
 
 
 @inject IHtmlLocalizer<SharedResource> SharedLocalizer
-@model TCYDMWebApp.ViewModels.ServiceInfoViewModel
+@model TCYDMWebApp.ViewModels.OnlineQueryViewModel
+
 <div class="sign-up">
     <h2>@SharedLocalizer["Online query"]</h2>
     <div class="sign-hr"></div>
     <hr class="hr-s">
     <div class="online-service">
-        <div class="row">
-            <div class="col-lg-4 col-md-12 ">
-                <h5>SERVIS</h5>
+        <form asp-action="GetOnlineTurn" method="post" enctype="application/x-www-form-urlencoded">
+            <div class="row">
+                <div class="col-lg-4 col-md-12 ">
 
-                <div class="form-group">
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option selected>@SharedLocalizer["Select Service"]</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
-                </div>
-                <div class="row">
-                    <div class="col-6  ">
-                        <div class="form-group">
-                            <input type="date" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <h5 style="text-transform:uppercase">@SharedLocalizer["Service"]</h5>
+                    @if (ViewData["ServerResponseError"] != null)
+                    {
+                        <div class="p-red-box servererror" style="position:absolute;left:5%;top:40%;z-index:2;display:none;">
+                            <p style="color:white">@ViewData["ServerResponseError"]</p>
+
                         </div>
+                    }
+
+                    <div class="form-group">
+                        <select class="form-control" asp-for="ServiceId" id="ServiceId">
+                            <option value="" selected>@SharedLocalizer["Select Service"]</option>
+                            @await Component.InvokeAsync("OnlineTurn")
+                        </select>
+                        <span asp-validation-for="ServiceId" class="text-danger"></span>
                     </div>
-                    <div class="col-6 elemet-wiz eni ">
-                        <div class="form-group">
-                            <input type="time" />
-                        </div>
+                    <div class="form-group">
+
+                        <input id="ServiceDate" asp-for="ServiceDate" value="" class="form-control" />
+                        <span asp-validation-for="ServiceDate" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="form-floating">
-                    <input type="text" class="form-control" placeholder="Comments" id="floatingTextarea2"
-                              style="height: 100px">
+                    <div class="form-group">
 
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-12">
-                <h5>Şəxsİ məlumatlar</h5>
-                <div class="form-group">
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option selected>@SharedLocalizer["Select Country"]</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option selected>@SharedLocalizer["Select Region"]</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ad">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ad">
-                </div>
-
-
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <select style="width: 100%;" class="form-control "
-                                    id="exampleFormControlSelect1">
-                                <option>Novbetinin Tarixi</option>
-                                <option>kisi</option>
-                                <option>qadin</option>
-
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <select style="width: 100%;" class="form-control "
-                                    id="exampleFormControlSelect1">
-                                <option>Novbetinin Saati</option>
-                                <option>kisi</option>
-                                <option>qadin</option>
-
-                            </select>
-                        </div>
+                        <textarea id="Info" asp-for="Info" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="Info" class="text-danger"></span>
                     </div>
 
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ad">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ad">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ad">
-
-                </div>
-                <button class="button-sign">Daxil ol</button>
 
 
-                <div class="p-box">
+
+
+
+                </div>
+
+                <div class="col-lg-4 col-md-12">
+                    <h5 style="text-transform:uppercase">@SharedLocalizer["Personal Info"]</h5>
+                    @await Component.InvokeAsync("UserInfo")
+                    <button class="button-sign">@SharedLocalizer["Get Turn"]</button>
+        </form>
+
+
+
+        <div class="p-box">
+            <p>
+                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                doloremque.
+            </p>
+        </div>
+        <div class="p-red-box">
+            <p>
+                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                doloremque.
+            </p>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-12">
+        <div class="lorem-text-account">
+            <h4>Lorem ipsum dolor sit amet,<br> consectetur adipiscing elit</h4>
+            <div class="row">
+
+                <div class="col-2">
+                    <div class="first-dot"></div>
+                    <div class="dot-circle"></div>
+                    <hr class="vr">
+                    <div class="second-dot"></div>
+                    <div class="second-dot-circle"></div>
+                    <div class="third-dot"></div>
+                    <div class="third-dot-circle"></div>
+                </div>
+                <div class="col-10">
+
+
                     <p>
-                        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                        doloremque.
+                        "Sed ut perspiciatis unde omnis iste natusb error sit voluptatem accusantium
+                        doloremque laudantium, totam rem aperiam.
+                    </p>
+
+                    <p>
+                        "But I must explain to you how all this mistaken idea of denouncing pleasure
+                        and praising pain was born and I will give you a complete account of the
+                        system, and expound the actual teachings of the great explorer
+                        of the truth, the master-builder of human happiness.
+                    </p>
+                    <p>
+                        "Sed ut perspiciatis undeiste natus error sit voluptatem accusantium
+                        doloremque laudantium, totam rem.
                     </p>
                 </div>
-                <div class="p-red-box">
-                    <p>
-                        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                        doloremque.
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-12">
-                <div class="lorem-text-account">
-                    <h4>Lorem ipsum dolor sit amet,<br> consectetur adipiscing elit</h4>
-                    <div class="row">
 
-                        <div class="col-2">
-                            <div class="first-dot"></div>
-                            <div class="dot-circle"></div>
-                            <hr class="vr">
-                            <div class="second-dot"></div>
-                            <div class="second-dot-circle"></div>
-                            <div class="third-dot"></div>
-                            <div class="third-dot-circle"></div>
-                        </div>
-                        <div class="col-10">
-
-
-                            <p>
-                                "Sed ut perspiciatis unde omnis iste natusb error sit voluptatem accusantium
-                                doloremque laudantium, totam rem aperiam.
-                            </p>
-
-                            <p>
-                                "But I must explain to you how all this mistaken idea of denouncing pleasure
-                                and praising pain was born and I will give you a complete account of the
-                                system, and expound the actual teachings of the great explorer
-                                of the truth, the master-builder of human happiness.
-                            </p>
-                            <p>
-                                "Sed ut perspiciatis undeiste natus error sit voluptatem accusantium
-                                doloremque laudantium, totam rem.
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </div>
+    </div>
+</div>
+@section Scripts {
+    @if (ViewData["ServerResponseError"] != null)
+    {
+        <script>
+        $(".servererror").fadeIn(function () {
+            setTimeout(function () {
+                $(".servererror").fadeOut();
+            }, 2000);
+        })
+        </script>
+    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+
+
+
+    }
+}

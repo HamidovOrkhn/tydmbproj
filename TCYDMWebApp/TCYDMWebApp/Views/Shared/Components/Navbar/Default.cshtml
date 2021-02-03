@@ -6,5 +6,5 @@
 @model List<TCYDMWebApp.DTO.OurServicesDTO>
 @foreach (var item in Model)
 {
-    <li><a href="/home/services/@item.ServiceId">@item.Name</a></li>
+    <li><a style="text-transform:capitalize" href="/home/services/@item.ServiceId">* @item.Name</a></li>
 }

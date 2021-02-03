@@ -1,15 +1,20 @@
-.menu-items>ul{
+.menu-items>ul {
     display: flex;
     justify-content: space-between;
-    padding:0 5rem 0 5rem;
+    padding: 0 3rem 0 3rem;
 }
-.menu-items>ul a, .menu-items>ul, .contact-number a{
+
+.menu-items>ul a,
+.menu-items>ul,
+.contact-number a {
     text-decoration: none;
     list-style-type: none;
-    color:#111;
+    color: #111;
     text-transform: uppercase;
 }
-.menu-items .btn-register, .phone-version-contact .btn-register{
+
+.menu-items .btn-register,
+.phone-version-contact .btn-register {
     text-decoration: underline;
     font-weight: bold;
 }
@@ -17,33 +22,170 @@
 .title {
     background-color: #ffffff;
 }
-#logo-img{
+
+#logo-img {
     position: absolute;
     left: 8%;
     bottom: 25%;
 }
 
-.languages select{
-    border:none;
+.languages select {
+    border: none;
 }
 
+
 /* phone-version non media */
-.phone-version-contact a{
+
+.phone-version-contact a {
     font-weight: 800;
     font-size: 1.3em;
 }
-.phone-version-contact{
+
+.phone-version-contact {
     border-bottom: 1px solid #dee2e6!important;
-    margin-bottom:.8em;
-    padding-bottom:.8em;
+    margin-bottom: .8em;
+    padding-bottom: .8em;
 }
-#Mobile-Nav-Links{
+
+#Mobile-Nav-Links {
     display: none;
 }
-.topnav a{
+
+#Mobile-Nav-Links a {
+    color: #000;
+}
+
+.topnav a {
     text-transform: uppercase;
 }
 
+.languages .fa-globe-europe {
+    position: absolute;
+    left: 10%;
+    bottom: 30%;
+}
+
+
+/* GOOGLE MAP */
+
+.mapouter {
+    position: relative;
+    text-align: right;
+    width: 100%;
+    height: 360px;
+}
+
+.gmap_canvas {
+    overflow: hidden;
+    background: none !important;
+    width: 100%;
+    height: 350px;
+}
+
+#gmap_canvas {
+    width: 100%;
+    height: 350px;
+}
+
+
+/* GOOGLE MAP */
+
+.webhr {
+    margin-top: 0;
+    display: block;
+    border: 1px solid #B5B9E1;
+    background-color: #B5B9E1;
+    width: 97%;
+}
+
+.hr-bottom {
+    height: 1px;
+    background: #ffffff;
+    /* Old browsers */
+    background: linear-gradient(to right, #ffffff42 0%, #ffffff42 41%, #ffc107 41%, #feb123 41%, #feb123 41%, #feb123 59%, #ffffff42 59%, #ffffff42 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ffffff42', endColorstr='#ffffff42', GradientType=1);
+    /* IE6-9 */
+}
+
+#btn-login {
+    text-decoration: underline;
+}
+
+.carousel-indicators li {
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+}
+
+.carousel-indicators {
+    bottom: 20px;
+}
+
+select {
+    cursor: pointer;
+}
+
+
+/* OUR SERVICES MENU */
+
+#our-services-menu {
+    background-color: #fff;
+    z-index: 999;
+    position: absolute;
+    top: 60%;
+    width: inherit;
+    visibility: hidden;
+    border-radius: 5px;
+    transition: all .5s;
+    transform: translateY(15px);
+    box-shadow: 15px 15px 20px -5px rgba(0, 0, 0, 0.44);
+    padding-bottom: 1em;
+    padding-top: 1em;
+}
+
+#our-services-menu a {
+    color: black;
+    text-decoration: none;
+}
+
+#our-services-menu li {
+    list-style-type: none;
+    margin-bottom: 0.3em;
+}
+
+#our-services-menu ul {
+    column-count: 3;
+    column-gap: 10px 10px 0 10px;
+}
+
+#btn-our-services:hover+#our-services-menu {
+    visibility: visible;
+    transform: translateY(0px);
+}
+
+#our-services-menu:hover {
+    visibility: visible;
+}
+
+
+/* OUR SERVICES MENU */
+
+#Mobile-Nav-Links li {
+    list-style-type: none;
+}
+
+#our-services-menu-mobile ul {
+    padding-left: 0;
+}
+
+#our-services-menu-mobile ul a {
+    font-size: 14px;
+    text-transform: none;
+}
+header .menu-items{
+    font-size:smaller;
+}
 .logo-img {
     width: 190px;
     height: 70px;
@@ -198,7 +340,7 @@
 
 .home-images img {
     width: 100%;
-    height: 100%;
+    object-fit: cover;
     border-radius: 33px;
 }
 
@@ -333,7 +475,7 @@
 
 #email {
     left: 513px;
-    width: 340px;
+    width: 100%;
     height: 40px;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border-radius: 2px;
@@ -421,7 +563,7 @@
 
 .first-a-tag a {
     display: flex;
-    color: #ffffff8c;
+    color: #fff;
     text-decoration: none;
     font-size: 24px;
     float: right;
@@ -429,7 +571,7 @@
 
 .second-a-tag a {
     display: flex;
-    color: #FFFFFF;
+    color: #ffffff8c;
     text-decoration: none;
     font-size: 24px;
 }
@@ -556,10 +698,6 @@
     background-color: #FFC107;
 }
 
-.lorem-text {
-    width: 384px;
-}
-
 .lorem-text p {
     display: flex;
     color: #FFFFFF;
@@ -672,7 +810,7 @@
 .sign-account {
     background-color: #FFC107;
     text-align: center;
-    width: 340px;
+    width: 100%;
     height: 40px;
     border: 2px solid #B5B9E1;
     border-radius: 2px;
@@ -916,12 +1054,11 @@
 }
 
 .forget {
-    text-align: left;
+    text-align: right;
     font: normal normal bold 12px/15px Inter;
     letter-spacing: 0px;
     color: #B5B9E1;
     opacity: 1;
-    margin-left: 41px;
 }
 
 .sign-hr {
@@ -941,7 +1078,6 @@
 }
 
 @media (max-width: 768px) {
-
     /*added codes*/
     /* NAVBAR MOBILE */
     .mobile-container {
@@ -951,80 +1087,79 @@
         height: 500px;
         color: white;
         border-radius: 10px;
-      }
-      
-      .topnav {
+    }
+    .topnav {
         overflow: hidden;
-        background-color: #464646;;
+        background-color: #fff;
+        ;
         position: relative;
-      }
-      
-      .topnav #myLinks {
+    }
+    .topnav #myLinks {
         display: none;
-      }
-      
-      .topnav a {
+    }
+    .topnav a {
         color: white;
         padding: 14px 16px;
         text-decoration: none;
         font-size: 17px;
         display: block;
-      }
-      
-      .topnav a.icon {
+    }
+    .topnav a.icon {
         background: black;
         display: block;
         position: absolute;
         right: 0;
         top: 0;
-      }
-      
-      .topnav a:hover {
+    }
+    .topnav a:hover {
         background-color: #ddd;
         color: black;
-      }
-      
-      .active {
-        background-color: #4CAF50;
-        color: white;
-      }
+    }
     /* NAVBAR MOBILE */
-    
-    .menu-items, .contact-number{
+    .menu-items,
+    .contact-number {
         display: none;
     }
-    .hamburger-menu{
+    .hamburger-menu {
         display: block!important;
         padding-left: 0;
     }
-    .hamburger-menu i{
+    .hamburger-menu i {
         font-size: 1.5em;
     }
-    .topnav #Mobile-Nav-Links{
+    .topnav #Mobile-Nav-Links {
         display: none;
     }
-
-    #logo-img{
+    #logo-img {
         left: 40%;
         bottom: 30%;
     }
-    .languages{
-        border:none!important;
+    .languages {
+        border: none!important;
         text-align: right;
         padding-right: 0;
     }
-    .phone-version-contact, .phone-version-contact .contact-number{
-        display:flex!important;
+    .phone-version-contact,
+    .phone-version-contact .contact-number {
+        display: flex!important;
     }
-    .phone-version-contact .btn-register{
+    .phone-version-contact .btn-register {
         text-decoration: underline;
         font-weight: bold;
         text-transform: uppercase;
-        color:#111;
-        font-size:1em;
+        color: #111;
+        font-size: 1em;
+    }
+    .languages .fa-globe-europe {
+        position: static;
+    }
+    .webhr {
+        display: none;
+    }
+    .hr-bottom {
+        background: linear-gradient(to right, #ffffff42 0%, #ffffff42 15%, #ffc107 15%, #feb123 15%, #feb123 15%, #feb123 85%, #ffffff42 85%, #ffffff42 100%);
     }
     /*added codes*/
-
     .nav {
         display: none;
     }
@@ -1107,25 +1242,11 @@
     .sign-input {
         margin: 0 55px;
     }
-    .forget {
-        margin-left: 50px;
-    }
-    .sign-account {
+    /* .sign-account {
         width: 100%;
-    }
+    } */
     .p-tag {
         margin-left: 28px;
-    }
-    .cins {
-        width: 73% !important;
-    }
-    .eni {
-        width: 91% !important;
-    }
-    .flexend {
-        margin-left: 47px;
-        margin-top: -27px;
-        margin-bottom: 22px;
     }
     .map {
         margin-left: 29px;
@@ -1139,5 +1260,17 @@
     .sign-hr {
         top: 279px;
         left: 140px;
+    }
+}
+
+@media (max-width: 568px) {
+    .logo img {
+        width: 170px;
+    }
+}
+
+@media (min-width: 768px) {
+    .topnav {
+        display: none !important;
     }
 }

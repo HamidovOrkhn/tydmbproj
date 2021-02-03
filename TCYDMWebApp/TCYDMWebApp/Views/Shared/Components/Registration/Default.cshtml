@@ -1,0 +1,72 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using Microsoft.AspNetCore.Mvc.Localization
+@using TCYDMWebApp.Repositories.Lang
+
+
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@model TCYDMWebApp.DTO.UserDTO
+    <form asp-action="UserRegister" asp-controller="Users">
+        <div class="form-group">
+            <select asp-for="CountryId" class="form-control" id="exampleFormControlSelect1">
+                <option value="">@SharedLocalizer["Select Country"]</option>
+                @await Component.InvokeAsync("Country")
+            </select>
+            <span class="text-danger" asp-validation-for="CountryId"></span>
+        </div>
+        <div class="form-group">
+            <select asp-for="RegionId" class="form-control" id="exampleFormControlSelect1">
+                <option value="">@SharedLocalizer["Select Region"]</option>
+                @await Component.InvokeAsync("Region")
+            </select>
+            <span class="text-danger" asp-validation-for="RegionId"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="Name" type="text" class="form-control" id="exampleFormControlInput1">
+            <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+
+
+        <div class="form-group">
+            <input asp-for="Surname" type="text" class="form-control" id="exampleFormControlInput1">
+            <span class="text-danger" asp-validation-for="Surname"></span>
+        </div>
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="form-group">
+                    <input asp-for="BornYear" as style="width: 100%;" type="date" class="form-control" id="exampleFormControlInput1">
+                    <span class="text-danger" asp-validation-for="BornYear"></span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="form-group">
+                    <select asp-for="SexId" class="form-control eni" id="exampleFormControlSelect1">
+                        <option value=1>Cins</option>
+                        <option value=2>kisi</option>
+                        <option value=3>qadin</option>
+                    </select>
+                    <span class="text-danger" asp-validation-for="SexId"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input asp-for="Email" type="text" class="form-control" id="exampleFormControlInput1">
+            <span class="text-danger" asp-validation-for="Email"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="TCNo" type="text" class="form-control" id="exampleFormControlInput1">
+            <span class="text-danger" asp-validation-for="TCNo"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="PhoneNumber" type="text" class="form-control" id="exampleFormControlInput1">
+            <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="Password" type="text" class="form-control" id="exampleFormControlInput1">
+            <span class="text-danger" asp-validation-for="Password"></span>
+        </div>
+        <button type="submit" class="sign-account">@SharedLocalizer["Registrate"]</button>
+    </form>

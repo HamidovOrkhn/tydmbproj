@@ -44,6 +44,10 @@
     text-transform: uppercase;
 }
 
+header .menu-items{
+    font-size:smaller;
+}
+
 .logo-img {
     width: 190px;
     height: 70px;
