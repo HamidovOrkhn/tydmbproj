@@ -74,7 +74,7 @@ namespace TCYDMWebApp.Controllers
                 TempData["ServerResponseError"] = response.Message;
                 return RedirectToAction("Login");
             }
-            TempData["SuccessResponse"] ="success";
+            TempData["SuccessResponse"] =_localizer["We send confirmation email to your email adress, please confirm it is actually your email.After confirmation you can access your account"].ToString();
             #region SendConfirmationEmail
             var configUrl = _configuration["BaseUrl"] + $"/users/userconfirm?uk={response.Data.Token}&&pk={response.Data.Password}";
             MailSender.SendEmail(
@@ -181,7 +181,7 @@ namespace TCYDMWebApp.Controllers
                 TempData["ServerResponseError"] = response.Message;
                 return RedirectToAction("ForgotPassword");
             }
-            TempData["SuccessResponse"] = "success";
+            TempData["SuccessResponse"] = _localizer["We send password restore link to your email, please check your email adress"].ToString();
             #region SendRestoreEmail
             var configUrl = _configuration["BaseUrl"] + $"/users/restore?uk={response.Data.Token}&&pk={response.Data.Password}";
             MailSender.SendEmail(
@@ -227,7 +227,7 @@ namespace TCYDMWebApp.Controllers
                 TempData["ServerResponseError"] = response.Message;
                 return RedirectToAction("ChangePassword");
             }
-            TempData["SuccessResponse"]= "success";
+            TempData["SuccessResponse"]= _localizer["Your Password Successfully Changed"].ToString();
             return RedirectToAction("Login", "Users");
         }
 

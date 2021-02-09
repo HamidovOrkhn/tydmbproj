@@ -334,7 +334,7 @@ namespace TCYDMWebServices.Controllers.V1
         public IActionResult ConfirmUserForgotPassword([FromBody] EmailConfirmationDTO request)
         {
             #region FunctionBody
-            var existedUser = _db.Users.Where(a => a.Password == request.Password && a.Token == request.Token).FirstOrDefault();
+            var existedUser = _db.Users.Where(a =>a.Token == request.Token).FirstOrDefault();
             if (existedUser is null)
             {
                 return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.NotFound));
