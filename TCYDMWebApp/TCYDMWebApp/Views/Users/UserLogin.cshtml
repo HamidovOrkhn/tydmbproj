@@ -1,7 +1,7 @@
 ﻿@model TCYDMWebApp.ViewModels.UserLoginViewModel
 
 @{
-    ViewData["Title"] = "UserLogin";
+    TempData["Title"] = "UserLogin";
 
 }
 @using Microsoft.AspNetCore.Mvc.Localization
@@ -20,15 +20,15 @@
             <div class="col-4 first-a-tag">
                 <a href="" id="btn-login" style="text-transform:capitalize">@SharedLocalizer["Sign in"]</a>
                 <!-- <hr class="first-line"> -->
-              
+
             </div>
             <div class="col-4 second-a-tag">
                 <a href="" id="btn-register" style="text-transform:capitalize">@SharedLocalizer["Registration"]</a>
                 <!-- <hr class="second-line"> -->
-                @if (ViewData["ServerResponseError"] != null)
+                @if (TempData["ServerResponseError"] != null)
                 {
                     <div class="p-red-box servererror" style="position:absolute;left:5%;top:40%;z-index:2;display:none;">
-                        <p style="color:white">@ViewData["ServerResponseError"]</p>
+                        <p style="color:white">@TempData["ServerResponseError"]</p>
 
                     </div>
                 }
@@ -37,13 +37,36 @@
                 <!-- <hr class="third-line"> -->
             </div>
         </div>
-        
+
     </div>
+    @if (TempData["SuccessResponse"] is object)
+    {
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">@SharedLocalizer["Confirmation needed"]</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @TempData["SuccessResponse"]
+                    </div>
+                    <div class="modal-footer">
+                       
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" >@SharedLocalizer["Understood"]</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
 
 
     <div class="container">
         <!-- REGISTER FORM -->
-        
+
         <div class="row d-none" id="register-form">
             <div class="col-lg-2">
             </div>
@@ -117,7 +140,7 @@
                                 </label>
                             </div>
                             <div class="col-6 text-right">
-                                <a class="forget" href="" style="text-transform:capitalize">@SharedLocalizer["Forgot Password"] ?</a>
+                                <a class="forget" asp-action="ForgotPassword" style="text-transform:capitalize">@SharedLocalizer["Forgot Password"] ?</a>
 
                             </div>
                         </div>
@@ -138,7 +161,7 @@
 </div>
 
 @section Scripts {
-    @if (ViewData["ServerResponseError"] != null)
+    @if (TempData["ServerResponseError"] != null)
     {
         <script>
             $(".servererror").fadeIn(function () {
@@ -148,6 +171,12 @@
             })
         </script>
    
+    }
+    @if (TempData["SuccessResponse"] is object)
+    {
+        <script>
+            $("#exampleModalCenter").modal("show");
+        </script>
     }
     <script>
         $(document).ready(function () {

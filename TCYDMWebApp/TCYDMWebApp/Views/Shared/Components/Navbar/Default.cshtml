@@ -4,7 +4,14 @@
 @{
 }
 @model List<TCYDMWebApp.DTO.OurServicesDTO>
+@if (Model == null)
+{
+    return;
+}
+else
+{
 @foreach (var item in Model)
 {
-    <li><a style="text-transform:capitalize" href="/home/services/@item.ServiceId">* @item.Name</a></li>
+    <li><a style="text-transform:capitalize" href="/home/services/@item?.ServiceId">* @item?.Name</a></li>
+}
 }

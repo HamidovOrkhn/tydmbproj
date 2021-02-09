@@ -6,5 +6,5 @@
 @model List<TCYDMWebApp.DTO.OurServicesDTO>
 @foreach (var item in Model)
 {
-    <option style="text-transform:capitalize" value=@Convert.ToInt64(item.Id)>* @item.Name</option>
+    <option class="services-list" style="text-transform:capitalize" id="@item.NeedsAdittion" value=@Convert.ToInt64(item?.ServiceId)>* @item?.Name</option>
 }

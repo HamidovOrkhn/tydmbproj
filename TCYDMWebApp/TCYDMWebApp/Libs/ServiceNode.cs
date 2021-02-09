@@ -76,6 +76,18 @@ namespace TCYDMWebApp.Libs
                             returnData.Message = _localizer["There is no such user with this credentials"];
                             returnData.Code = 400;
                             break;
+                        case 7:
+                            returnData.Message = _localizer["This time has taken by other user, please change time or date"];
+                            returnData.Code = 400;
+                            break;
+                        case 8:
+                            returnData.Message = _localizer["You have already unfinished query. Please wait until it will be finished. You will receive email when query finish"];
+                            returnData.Code = 400;
+                            break;
+                        case 9:
+                            returnData.Message = _localizer["Please confirm your email adress"];
+                            returnData.Code = 400;
+                            break;
                         default:
                             returnData.Message = "ERROR_TYPE_UNKNOWN";
                             returnData.Code = 500;
@@ -171,6 +183,18 @@ namespace TCYDMWebApp.Libs
                             returnData.Message = _localizer["There is no such user with this credentials"];
                             returnData.Code = 400;
                             break;
+                        case 7:
+                            returnData.Message = _localizer["This time has taken by other user, please change time or date"];
+                            returnData.Code = 400;
+                            break;
+                        case 8:
+                            returnData.Message = _localizer["You have already unfinished query. Please wait until it will be finished. You will receive email when query finish"];
+                            returnData.Code = 400;
+                            break;
+                        case 9:
+                            returnData.Message = _localizer["Please confirm your email adress"];
+                            returnData.Code = 400;
+                            break;
                         default:
                             returnData.Message = "ERROR_TYPE_UNKNOWN";
                             returnData.Code = 500;
@@ -236,6 +260,18 @@ namespace TCYDMWebApp.Libs
                             break;
                         case 6:
                             returnData.Message = _localizer["There is no such user with this credentials"];
+                            returnData.Code = 400;
+                            break;
+                        case 7:
+                            returnData.Message = _localizer["This time has taken by other user, please change time or date"];
+                            returnData.Code = 400;
+                            break;
+                        case 8:
+                            returnData.Message = _localizer["You have already unfinished query. Please wait until it will be finished. You will receive email when query finish"];
+                            returnData.Code = 400;
+                            break;
+                        case 9:
+                            returnData.Message = _localizer["Please confirm your email adress"];
                             returnData.Code = 400;
                             break;
                         default:

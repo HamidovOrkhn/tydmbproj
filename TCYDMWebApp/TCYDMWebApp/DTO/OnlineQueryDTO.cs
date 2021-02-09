@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using TCYDMWebApp.Models;
+using TCYDMWebServices.DTO;
 
 namespace TCYDMWebApp.DTO
 {
@@ -18,5 +20,6 @@ namespace TCYDMWebApp.DTO
         public DateTime StartDate { get; set; }
         [MaxLength(256)]
         public string Info { get; set; }
+        public List<PDFDTO> Files { get; set; }
     }
 }

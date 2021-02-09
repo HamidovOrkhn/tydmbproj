@@ -14,7 +14,10 @@ namespace TCYDMWebServices.Repositories.Enums
             ValidationFailed,
             AlreadyExists,
             WrongPassword,
-            WrongUser
+            WrongUser,
+            ExistedTime,
+            UnfinishedQuery,
+            NeedConfirmation
         }
     }
 }

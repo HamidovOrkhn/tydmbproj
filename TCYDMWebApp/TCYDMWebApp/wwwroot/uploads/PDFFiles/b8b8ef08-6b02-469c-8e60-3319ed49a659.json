@@ -1,0 +1,117 @@
+{
+  "code": 200,
+  "message": "Success",
+  "isCatched": 0,
+  "data": [
+    {
+      "id": 1,
+      "name": "\r\nResidence Permit (Short Term)",
+      "languageId": 1
+    },
+    {
+      "id": 2,
+      "name": "\r\nResidence Permit (Long Term)",
+      "languageId": 1
+    },
+    {
+      "id": 3,
+      "name": "Citizenship (Turkey)",
+      "languageId": 1
+    },
+    {
+      "id": 4,
+      "name": "\r\nWork permit",
+      "languageId": 1
+    },
+    {
+      "id": 5,
+      "name": "Education in Turkey",
+      "languageId": 1
+    },
+    {
+      "id": 6,
+      "name": "Investment in Turkey",
+      "languageId": 1
+    },
+    {
+      "id": 7,
+      "name": "Establish a company in Turkey\r\n",
+      "languageId": 1
+    },
+    {
+      "id": 8,
+      "name": "Financial worker support\r\n",
+      "languageId": 1
+    },
+    {
+      "id": 9,
+      "name": "Lawyer support\r\n",
+      "languageId": 1
+    },
+    {
+      "id": 10,
+      "name": "Insurance services (All)",
+      "languageId": 1
+    },
+    {
+      "id": 11,
+      "name": "Notary Services\r\n",
+      "languageId": 1
+    },
+    {
+      "id": 12,
+      "name": "All travel services",
+      "languageId": 1
+    },
+    {
+      "id": 13,
+      "name": "Health tourism",
+      "languageId": 1
+    },
+    {
+      "id": 14,
+      "name": "Rent a car",
+      "languageId": 1
+    },
+    {
+      "id": 15,
+      "name": "\r\nDesign, renovation and construction works",
+      "languageId": 1
+    },
+    {
+      "id": 16,
+      "name": "\r\nCleaning services",
+      "languageId": 1
+    },
+    {
+      "id": 17,
+      "name": "\r\nForeign assistance to find work in Turkey",
+      "languageId": 1
+    },
+    {
+      "id": 18,
+      "name": "\r\nVisa support for Canada",
+      "languageId": 1
+    },
+    {
+      "id": 19,
+      "name": "\r\nImmigration support to Canada",
+      "languageId": 1
+    },
+    {
+      "id": 20,
+      "name": "Visa support for European countries",
+      "languageId": 1
+    },
+    {
+      "id": 21,
+      "name": "\r\nWork permit support in European countries",
+      "languageId": 1
+    },
+    {
+      "id": 22,
+      "name": "\r\nImmigration support to European countries",
+      "languageId": 1
+    }
+  ]
+}

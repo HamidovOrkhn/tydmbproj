@@ -31,7 +31,8 @@ namespace TCYDMWebServices.Repositories.Repos
                 TCNo = obj.TCNo,
                 BornYear = obj.BornYear,
                 SexId = obj.SexId,
-                PKey = obj.PKey
+                PKey = obj.PKey,
+                Token = Guid.NewGuid().ToString()
                 
                 });
 

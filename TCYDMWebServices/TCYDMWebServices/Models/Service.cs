@@ -15,5 +15,11 @@ namespace TCYDMWebServices.Models
         public int LanguageId { get; set; }
         [Required]
         public int ServiceId { get; set; }
+        [Range(1,10)]
+        public int NeedsAdittion { get; set; }
+        [Range(1,5)]
+        public int NeedsPayment { get; set; }
+        [Range(1,3)]
+        public int IsLocal { get; set; }
     }
 }

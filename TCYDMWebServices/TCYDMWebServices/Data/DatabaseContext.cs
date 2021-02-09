@@ -23,6 +23,7 @@ namespace TCYDMWebServices.Data
         public DbSet<ContactUs> ContactUss { get; set; }
         public DbSet<Langluage> Languages { get; set; }
         public DbSet<ServiceInfo> ServiceInfos { get; set; }
+        public DbSet<PDFClass> PDFBase { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

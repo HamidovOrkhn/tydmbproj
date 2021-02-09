@@ -15,21 +15,22 @@
     <div class="sign-hr"></div>
     <hr class="hr-s">
     <div class="online-service">
-        <form asp-action="GetOnlineTurn" method="post" enctype="application/x-www-form-urlencoded">
+        <form asp-action="GetOnlineTurn" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-lg-4 col-md-12 ">
 
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <h5 style="text-transform:uppercase">@SharedLocalizer["Service"]</h5>
-                    @if (ViewData["ServerResponseError"] != null)
+                    @if (TempData["ServerResponseError"] != null)
                     {
                         <div class="p-red-box servererror" style="position:absolute;left:5%;top:40%;z-index:2;display:none;">
-                            <p style="color:white">@ViewData["ServerResponseError"]</p>
+                            <p style="color:white">@TempData["ServerResponseError"]</p>
 
                         </div>
                     }
 
                     <div class="form-group">
+
                         <select class="form-control" asp-for="ServiceId" id="ServiceId">
                             <option value="" selected>@SharedLocalizer["Select Service"]</option>
                             @await Component.InvokeAsync("OnlineTurn")
@@ -37,10 +38,62 @@
                         <span asp-validation-for="ServiceId" class="text-danger"></span>
                     </div>
                     <div class="form-group">
+                        <div class="row">
+                            <div class="col-6">
+                                <select class="form-control" asp-for="ServiceDate" id="ServiceId">
+                                    <option value="" selected>@SharedLocalizer["Select Date"]</option>
+                                   
+                                    @for (int i = 0; i < 7; i++)
+                                    {
+                                        <option>@DateTime.Now.AddDays(i).ToString("yyyy-MM-dd")</option>
+                                    }
 
-                        <input id="ServiceDate" asp-for="ServiceDate" value="" class="form-control" />
-                        <span asp-validation-for="ServiceDate" class="text-danger"></span>
+
+                                </select>
+                                <span asp-validation-for="ServiceDate" class="text-danger"></span>
+                            </div>
+                            <div class="col-6">
+                                <select class="form-control" asp-for="ServiceTime" id="ServiceId">
+                                    <option value="" selected>@SharedLocalizer["Select Time"]</option>
+                                    @{ int hour = 8;
+                                        int minute = 0;
+                                    }
+                                    @for (int i = 0; i <= 12; i++)
+                                    {
+                                        @(minute = 0)
+                                        for (int j = 0; j < 2; j++)
+                                        {
+                                            if (hour != 20)
+                                            {
+                                                <option>@(hour):@(minute)0</option>
+                                                @(minute += 3);
+                                            }
+                                            else
+                                            {
+                                                
+                                            }
+
+                                        }
+
+                                        @(hour+=1)
+                                    }
+
+
+                                </select>
+                                <span asp-validation-for="ServiceTime" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
                     </div>
+                    <div class="Ikametizni" style="display:none">
+
+                       
+
+
+                    </div>
+                    <input type="hidden" name="FileNumber" id="FileNumber" />
+
+
                     <div class="form-group">
 
                         <textarea id="Info" asp-for="Info" class="form-control" rows="4"></textarea>
@@ -115,17 +168,46 @@
 </div>
     </div>
 </div>
+
 @section Scripts {
-    @if (ViewData["ServerResponseError"] != null)
+    @if (TempData["ServerResponseError"] != null)
     {
+
         <script>
-        $(".servererror").fadeIn(function () {
-            setTimeout(function () {
-                $(".servererror").fadeOut();
-            }, 2000);
-        })
+            $(".servererror").fadeIn(function () {
+                setTimeout(function () {
+                    $(".servererror").fadeOut();
+                }, 3000);
+            })
         </script>
     }
+ 
+    <script>
+        $("#ServiceId").change(function () {
+            var numberofadittion = $(this).children(":selected").attr("id");
+            $(".Ikametizni").empty()
+            $("#FileNumber").val(numberofadittion);
+            for (var i = 0; i < numberofadittion; i++) {
+                $(".Ikametizni").append(
+                    "<div class='form-group'>" +
+                    "<input id='ServiceDate' name='Files' type='file' value='' class='form-control' />" +
+                    "</div>");
+            }
+            //var queryParams = new URLSearchParams(window.location.search);
+            //queryParams.set("ads", numberofadittion)
+            //history.replaceState(null, null, "?" + queryParams.toString())
+            if ($(this).val() == "3") {
+                $(".Ikametizni").show();
+            } else {
+                $(".Ikametizni").hide();
+            }
+        })
+
+     
+
+    </script>
+
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
 

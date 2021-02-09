@@ -136,6 +136,26 @@ namespace TCYDMWebServices.Migrations
                     b.ToTable("OnlineQueries");
                 });
 
+            modelBuilder.Entity("TCYDMWebServices.Models.PDFClass", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<long>("OnlineQueryId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("PDFName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OnlineQueryId");
+
+                    b.ToTable("PDFBase");
+                });
+
             modelBuilder.Entity("TCYDMWebServices.Models.Region", b =>
                 {
                     b.Property<int>("Id")
@@ -163,6 +183,9 @@ namespace TCYDMWebServices.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int>("IsLocal")
+                        .HasColumnType("int");
+
                     b.Property<int>("LanguageId")
                         .HasColumnType("int");
 
@@ -170,6 +193,12 @@ namespace TCYDMWebServices.Migrations
                         .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
+
+                    b.Property<int>("NeedsAdittion")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NeedsPayment")
+                        .HasColumnType("int");
 
                     b.Property<int>("ServiceId")
                         .HasColumnType("int");
@@ -220,6 +249,9 @@ namespace TCYDMWebServices.Migrations
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("IsConfirmed")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -324,6 +356,17 @@ namespace TCYDMWebServices.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("TCYDMWebServices.Models.PDFClass", b =>
+                {
+                    b.HasOne("TCYDMWebServices.Models.OnlineQuery", "OnlineQuery")
+                        .WithMany("PdfClasses")
+                        .HasForeignKey("OnlineQueryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OnlineQuery");
+                });
+
             modelBuilder.Entity("TCYDMWebServices.Models.User", b =>
                 {
                     b.HasOne("TCYDMWebServices.Models.Country", "Countries")
@@ -346,6 +389,11 @@ namespace TCYDMWebServices.Migrations
             modelBuilder.Entity("TCYDMWebServices.Models.Country", b =>
                 {
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("TCYDMWebServices.Models.OnlineQuery", b =>
+                {
+                    b.Navigation("PdfClasses");
                 });
 
             modelBuilder.Entity("TCYDMWebServices.Models.Region", b =>

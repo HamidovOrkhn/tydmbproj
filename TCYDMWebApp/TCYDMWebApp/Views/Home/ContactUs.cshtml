@@ -17,7 +17,7 @@
                 <img src="~/homelayout/logo/phone.svg" alt="">
                 <div class="address-map">
                     <p>@SharedLocalizer["Mobile"]</p>
-                    <a href="tel:@Model.Phone">@Model.Phone</a>
+                    <a href="tel:@Model?.Phone">@Model?.Phone</a>
                 </div>
             </div>
             <hr class="d-none showhr">
@@ -27,7 +27,7 @@
                 <img src="~/homelayout/logo/email.svg" alt="">
                 <div class="address-map">
                     <p>@SharedLocalizer["Email"]</p>
-                    <a href="mailto:@Model.Email">@Model.Email</a>
+                    <a href="mailto:@Model?.Email">@Model?.Email</a>
                 </div>
             </div>
             <hr class="d-none showhr">
@@ -38,7 +38,7 @@
                 <div class="address-map">
                     <p>@SharedLocalizer["Adress"]</p>
                     <a href="http://maps.google.com/?q=@Model.Adress">
-                        @Model.Adress
+                        @Model?.Adress
                     </a>
                 </div>
             </div>
@@ -47,6 +47,6 @@
     </div>
     <h4>@SharedLocalizer["Contact us"]</h4>
     <div class="contact-text">
-        @Model.Content
+        @Model?.Content
     </div>
 </div>

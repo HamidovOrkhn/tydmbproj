@@ -36,7 +36,7 @@ namespace TCYDMWebServices.Repositories.Repos
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
 

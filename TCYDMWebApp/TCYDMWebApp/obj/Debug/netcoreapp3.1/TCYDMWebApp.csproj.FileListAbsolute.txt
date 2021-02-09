@@ -277,8 +277,6 @@ C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\bin\Debug\netcorea
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\bin\Debug\netcoreapp3.1\Polly.dll
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\bin\Debug\netcoreapp3.1\Polly.Extensions.Http.dll
-C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\TCYDMWebApp.csproj.CoreCompileInputs.cache
-C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\TCYDMWebApp.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Navbar\Default.cshtml.g.cs
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Contact\Default.cshtml.g.cs
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Footer\Default.cshtml.g.cs
@@ -294,3 +292,10 @@ C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcorea
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\UserEdit\Default.cshtml.g.cs
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Users\UserEdit.cshtml.g.cs
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Registration\Default.cshtml.g.cs
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\bin\Debug\netcoreapp3.1\MimeKit.dll
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\bin\Debug\netcoreapp3.1\MailKit.dll
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\TCYDMWebApp.csproj.CoreCompileInputs.cache
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\TCYDMWebApp.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Users\ForgotPassword.cshtml.g.cs
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Users\ChangePassword.cshtml.g.cs

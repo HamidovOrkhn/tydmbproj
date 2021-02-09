@@ -126,11 +126,20 @@
   <data name="Cannot find this type of data" xml:space="preserve">
     <value>Не могу найти этот тип данных</value>
   </data>
+  <data name="Change Password" xml:space="preserve">
+    <value>Изменить пароль</value>
+  </data>
   <data name="Change Profile" xml:space="preserve">
     <value>Изменить профиль</value>
   </data>
   <data name="Comment" xml:space="preserve">
     <value>Комментарий</value>
+  </data>
+  <data name="Confirm Password" xml:space="preserve">
+    <value>Подтвердить Пароль</value>
+  </data>
+  <data name="Confirmation needed" xml:space="preserve">
+    <value>Требуется подтверждение</value>
   </data>
   <data name="Contact us" xml:space="preserve">
     <value>Свяжитесь с нами</value>
@@ -149,6 +158,9 @@
   </data>
   <data name="Email or Phone number max length must be 100" xml:space="preserve">
     <value>Вы должны ввести адрес электронной почты или пароль</value>
+  </data>
+  <data name="Email sended" xml:space="preserve">
+    <value>Электронное письмо отправлено</value>
   </data>
   <data name="Forgot Password" xml:space="preserve">
     <value>Забыли пароль</value>
@@ -198,6 +210,9 @@
   <data name="Password is wrong" xml:space="preserve">
     <value>Пароль неверный</value>
   </data>
+  <data name="Passwords are not match" xml:space="preserve">
+    <value>Пароли не совпадают</value>
+  </data>
   <data name="Personal ID" xml:space="preserve">
     <value>Персональный идентификационный номер</value>
   </data>
@@ -213,11 +228,26 @@
   <data name="Phone number must be a valid number" xml:space="preserve">
     <value>Номер телефона должен быть действующим</value>
   </data>
+  <data name="Please confirm your email adress" xml:space="preserve">
+    <value>Пожалуйста, подтвердите свой адрес электронной почты</value>
+  </data>
+  <data name="Please select required files" xml:space="preserve">
+    <value>Пожалуйста, выберите необходимые файлы</value>
+  </data>
   <data name="Please select service" xml:space="preserve">
     <value>Пожалуйста, выберите услугу</value>
   </data>
   <data name="Please select service attend date" xml:space="preserve">
     <value>Пожалуйста, выберите дату посещения услуги</value>
+  </data>
+  <data name="Please select service attend time" xml:space="preserve">
+    <value>Пожалуйста, выберите время посещения службы</value>
+  </data>
+  <data name="Please select valid hour" xml:space="preserve">
+    <value>Пожалуйста, выберите действительный час</value>
+  </data>
+  <data name="Please send all required files, because if files not send operation will be not succeeded." xml:space="preserve">
+    <value>Пожалуйста, отправьте все необходимые файлы, потому что, если файлы не будут отправлены, операция не будет успешной.</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Профиль</value>
@@ -237,6 +267,12 @@
   <data name="Remember me" xml:space="preserve">
     <value>Запомни меня</value>
   </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Восстановить</value>
+  </data>
+  <data name="Restore Password" xml:space="preserve">
+    <value>Восстановить пароль</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Сохранить</value>
   </data>
@@ -246,6 +282,9 @@
   <data name="Select Country" xml:space="preserve">
     <value>Выберите страну</value>
   </data>
+  <data name="Select Date" xml:space="preserve">
+    <value>Выберите дату</value>
+  </data>
   <data name="Select Gender" xml:space="preserve">
     <value>Выберите пол</value>
   </data>
@@ -254,6 +293,9 @@
   </data>
   <data name="Select Service" xml:space="preserve">
     <value>Выберите услугу</value>
+  </data>
+  <data name="Select Time" xml:space="preserve">
+    <value>Выберите время</value>
   </data>
   <data name="Service" xml:space="preserve">
     <value>обслуживание</value>
@@ -279,8 +321,20 @@
   <data name="This credentials are already exists, please try another one" xml:space="preserve">
     <value>Эти учетные данные уже существуют, попробуйте другой</value>
   </data>
+  <data name="This time has taken by other user, please change time or date" xml:space="preserve">
+    <value>Это время заняло другой пользователь, измените время или дату</value>
+  </data>
+  <data name="Understood" xml:space="preserve">
+    <value>Понял</value>
+  </data>
   <data name="WE OPERATE 24/7" xml:space="preserve">
     <value>МЫ РАБОТАЕМ 24/7</value>
+  </data>
+  <data name="We send confirmation email to your email adress, please confirm it is actually your email.After confirmation you can access your account" xml:space="preserve">
+    <value>Мы отправляем письмо с подтверждением на ваш адрес электронной почты, пожалуйста, подтвердите, что это действительно ваш адрес электронной почты.После подтверждения вы можете получить доступ к своей учетной записи</value>
+  </data>
+  <data name="We send password restore link to your email, please check your email adress" xml:space="preserve">
+    <value>Мы отправляем ссылку для восстановления пароля на вашу электронную почту, пожалуйста, проверьте свой адрес электронной почты</value>
   </data>
   <data name="What We Do" xml:space="preserve">
     <value>Что мы делаем</value>
@@ -294,10 +348,16 @@
   <data name="Year of birth is required" xml:space="preserve">
     <value>Год рождения обязателен</value>
   </data>
+  <data name="You have already unfinished query. Please wait until it will be finished. You will receive email when query finish" xml:space="preserve">
+    <value>У вас уже есть незаконченный запрос. Подождите, пока он не будет завершен. Когда запрос будет завершен, вы получите электронное письмо</value>
+  </data>
   <data name="You must type Email or Password" xml:space="preserve">
     <value>Вы должны ввести адрес электронной почты или пароль</value>
   </data>
   <data name="Your Email or Phone number" xml:space="preserve">
     <value>Ваш адрес электронной почты или номер телефона</value>
+  </data>
+  <data name="Your Password Successfully Changed" xml:space="preserve">
+    <value>Ваш пароль успешно изменен</value>
   </data>
 </root>

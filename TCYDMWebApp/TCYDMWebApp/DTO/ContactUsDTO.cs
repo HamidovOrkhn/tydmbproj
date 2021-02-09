@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TCYDMWebApp.DTO
 {
+
     public class ContactUsDTO
     {
         [Key]
@@ -22,4 +23,5 @@ namespace TCYDMWebApp.DTO
         [Required]
         public int LanguageId { get; set; }
     }
+
 }

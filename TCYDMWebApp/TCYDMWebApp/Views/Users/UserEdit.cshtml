@@ -3,17 +3,17 @@
 *@
 @{
 }
-@if (ViewData["ServerResponseError"] != null)
+@if (TempData["ServerResponseError"] != null)
 {
     <div class="p-red-box servererror" style="position:absolute;left:5%;top:40%;z-index:2;display:none;">
-        <p style="color:white">@ViewData["ServerResponseError"]</p>
+        <p style="color:white">@TempData["ServerResponseError"]</p>
 
     </div>
 }
 @await Component.InvokeAsync("UserEdit")
 @section Scripts
 {
-    @if (ViewData["ServerResponseError"] != null)
+    @if (TempData["ServerResponseError"] != null)
     {
         <script>
             $(".servererror").fadeIn(function () {

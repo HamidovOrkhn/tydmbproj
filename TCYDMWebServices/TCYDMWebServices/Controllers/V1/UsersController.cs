@@ -62,25 +62,24 @@ namespace TCYDMWebServices.Controllers.V1
             }
             string hashedPassword = Crypto.HashPassword(request.Password);
             string pKey = Hasher.EncryptString(request.Password, _configuration["Jwt:Key"]);
-            var user = new UserDTO {
+            string token = Guid.NewGuid().ToString();
+            _db.Users.Add(new User
+            {
                 CountryId = request.CountryId,
-                Email = request.Email,
-                Name = request.Email,
                 Surname = request.Surname,
+                Email = request.Email,
+                Name = request.Name,
                 Password = hashedPassword,
                 PhoneNumber = request.PhoneNumber,
                 RegionId = request.RegionId,
                 TCNo = request.TCNo,
-                PKey = pKey,
                 BornYear = request.BornYear,
-                SexId = request.SexId
-            };
-            bool IsSucceed = _userService.Add(user);
-            if (!IsSucceed)
-            {
-                return StatusCode(500, new ReturnErrorMessage((int)ErrorTypes.Errors.Internal, code: 500));
-            }
-            return StatusCode(200, new ReturnMessage(message:"User Created"));
+                SexId = request.SexId,
+                PKey = pKey,
+                Token = token
+            });
+            _db.SaveChanges();
+            return StatusCode(200, new ReturnMessage(message:"User Created",data:new { Token = token, Password = hashedPassword }));
             #endregion
         }
         [HttpPost("login")]
@@ -97,6 +96,10 @@ namespace TCYDMWebServices.Controllers.V1
             if (!Crypto.VerifyHashedPassword(user.Password,request.Password))
             {
                 return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.WrongPassword, message: "Wrong Password"));
+            }
+            if (user.IsConfirmed == 0)
+            {
+                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.NeedConfirmation, message: "Need Confirmation"));
             }
             #region Jwt created and Refresh token updated
             var claim = new[] { new Claim(ClaimTypes.Name, user.Name) };
@@ -156,7 +159,7 @@ namespace TCYDMWebServices.Controllers.V1
             return Ok(new ReturnMessage());
             #endregion
         }
-        [Authorize]
+        //[Authorize]
         [HttpPost("online_query")]
         public IActionResult GetOnlineQuery([FromBody] OnlineQueryDTO request)
         {
@@ -164,7 +167,12 @@ namespace TCYDMWebServices.Controllers.V1
             bool existedQuery = _db.OnlineQueries.Any(c => c.UserId == request.UserId);
             if (existedQuery)
             {
-                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.AlreadyExists));
+                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.UnfinishedQuery));
+            }
+            bool existedDate = _db.OnlineQueries.Any(a => a.ServiceDate == request.ServiceDate);
+            if (existedDate)
+            {
+                return StatusCode(400,new ReturnErrorMessage((int)ErrorTypes.Errors.ExistedTime));
             }
             request.StartDate = DateTime.Now;
             int datecompare = DateTime.Compare(request.StartDate, request.ServiceDate);
@@ -172,11 +180,27 @@ namespace TCYDMWebServices.Controllers.V1
             {
                 return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.ValidationFailed));
             }
-            bool isAdded = _onlineQueryService.Add(request);
-            if (!isAdded)
+            OnlineQuery query = new OnlineQuery();
+            query.StartDate = request.StartDate;
+            query.ServiceDate = request.ServiceDate;
+            query.ServiceId = request.ServiceId;
+            query.UserId = request.UserId;
+            query.Info = request.Info;
+            List<PDFClass> pdfcls = new List<PDFClass>();   
+            if (request.Files !=null)
             {
-                return StatusCode(500, new ReturnErrorMessage((int)ErrorTypes.Errors.Internal,code:500));
+                if (request.Files.Count > 0)
+                {
+                    foreach (var item in request.Files)
+                    {
+                        pdfcls.Add(new PDFClass { PDFName = item.PDFName });
+                    }
+                }
             }
+            query.PdfClasses = pdfcls;
+            _db.OnlineQueries.Add(query);
+
+            _db.SaveChanges();
             return Ok(new ReturnMessage());
             #endregion
         }
@@ -268,6 +292,80 @@ namespace TCYDMWebServices.Controllers.V1
                 return StatusCode(500,new ReturnErrorMessage((int)ErrorTypes.Errors.Internal,message:x.Message));
             }
             #endregion
+        }
+        [HttpPost("confirmuser")]
+        public IActionResult ConfirmUser([FromBody] EmailConfirmationDTO request)
+        {
+            #region FunctionBody
+            var existedUser = _db.Users.Where(a => a.Password == request.Password).FirstOrDefault();
+            if (existedUser is null)
+            {
+                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.NotFound));
+            }
+            if (existedUser.Token != request.Token)
+            {
+                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.NotFound));
+            }
+            if (existedUser.IsConfirmed != 0)
+            {
+                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.NotFound));
+            }
+            existedUser.Token = Guid.NewGuid().ToString();
+            existedUser.IsConfirmed = 1;
+            _db.SaveChanges();
+            return Ok(new ReturnMessage());
+            #endregion
+        }
+        [HttpPost("getusertoken")]
+        public IActionResult GetUserToken([FromBody] IdentityDTO request)
+        {
+            #region FunctionBody
+            var existedUser = _db.Users.Where(a => a.Email == request.Identification || a.PhoneNumber == request.Identification).FirstOrDefault();
+            if (existedUser is null)
+            {
+                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.WrongUser));
+            }
+            if (existedUser.IsConfirmed == 0)
+            {
+                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.NeedConfirmation));
+            }
+            return Ok(new ReturnMessage(data:new {Token = existedUser.Token, Password = existedUser.Password,Email = existedUser.Email,Name = existedUser.Name}));
+            #endregion
+        }
+
+        [HttpPost("confirmuser_forgotpassword")]
+        public IActionResult ConfirmUserForgotPassword([FromBody] EmailConfirmationDTO request)
+        {
+            #region FunctionBody
+            var existedUser = _db.Users.Where(a => a.Password == request.Password && a.Token == request.Token).FirstOrDefault();
+            if (existedUser is null)
+            {
+                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.NotFound));
+            }
+            if (existedUser.IsConfirmed == 0)
+            {
+                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.NeedConfirmation));
+            }
+            return Ok(new ReturnMessage());
+            #endregion
+        }
+        [HttpPost("change_password")]
+        public IActionResult ChangePassword([FromBody] ChangePassword request)
+        {
+            var existedUser = _db.Users.Where(a=>a.Token == request.uk).FirstOrDefault();
+            if (existedUser is null)
+            {
+                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.NotFound));
+            }
+            if (existedUser.IsConfirmed == 0)
+            {
+                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.NeedConfirmation));
+            }
+            existedUser.Token = Guid.NewGuid().ToString();
+            existedUser.Password = Crypto.HashPassword(request.Password);
+            existedUser.PKey = Hasher.EncryptString(request.Password, _configuration["Jwt:Key"]);
+            _db.SaveChanges();
+            return Ok(new ReturnMessage());
         }
 
 

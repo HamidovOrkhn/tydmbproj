@@ -10,6 +10,7 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using TCYDMWebApp.DTO;
 using TCYDMWebApp.Filters;
+using TCYDMWebApp.Helper;
 using TCYDMWebApp.Libs;
 using TCYDMWebApp.Repositories.Lang;
 using TCYDMWebApp.ViewModels;
@@ -57,8 +58,8 @@ namespace TCYDMWebApp.Controllers
             ReturnMessage<object> response = new ServiceNode<UserDTO, object>(_localizer, _fc).PutClient(request, "/api/v1/users/update/"+ UserId, HttpContext.Session.GetString("JwtSession"));
             if (response.IsCatched == 1)
             {
-                ViewData["ServerResponseError"] = response.Message;
-                return View("UserEdit");
+                TempData["ServerResponseError"] = response.Message;
+                return RedirectToAction("UserEdit");
             }
             #endregion
             return Redirect("/");
@@ -67,15 +68,46 @@ namespace TCYDMWebApp.Controllers
         public IActionResult UserRegister([FromForm] UserDTO request)
         {
             #region Register Body
-            ReturnMessage<object> response = new ServiceNode<UserDTO, object>(_localizer, _fc).PostClient(request, "/api/v1/users/register");
+            ReturnMessage<EmailConfirmationDTO> response = new ServiceNode<UserDTO, EmailConfirmationDTO>(_localizer, _fc).PostClient(request, "/api/v1/users/register");
             if (response.IsCatched == 1)
             {
-                ViewData["ServerResponseError"] = response.Message;
-                return View("UserLogin");
+                TempData["ServerResponseError"] = response.Message;
+                return RedirectToAction("Login");
             }
+            TempData["SuccessResponse"] = _localizer["We send confirmation email to your email adress, please confirm it is actually your email.After confirmation you can access your account"].ToString();
+            #region SendConfirmationEmail
+            var configUrl = _configuration["BaseUrl"] + $"/users/userconfirm?uk={response.Data.Token}&&pk={response.Data.Password}";
+            MailSender.SendEmail(
+             "Orxan Hemidov",
+             "orxan.hamidov.orxan.hamidov@mail.ru",
+              request.Name,
+              request.Email,
+             "Email Confirmation",
+              "<a href ="+configUrl+">Confirm email</a>",
+             "orxan.hamidov.orxan.hamidov@mail.ru",
+             "o1o2o3o4o5o6o7o8o9o10"
+             );
+            #endregion
             #endregion
             return RedirectToAction("Login","Users");
         }
+
+        [HttpGet]
+        public IActionResult UserConfirm([FromQuery(Name ="uk")] string uk, [FromQuery(Name ="pk")] string pk)
+        {
+            #region Get User Confirmation Params
+            EmailConfirmationDTO configParams = new EmailConfirmationDTO();
+            configParams.Password = pk;
+            configParams.Token = uk;
+            ReturnMessage<object> response = new ServiceNode<EmailConfirmationDTO, object>(_fc).PostClient(configParams, "/api/v1/users/confirmuser");
+            if (response.IsCatched == 1)
+            {
+                return Redirect("/");
+            }
+            #endregion
+            return RedirectToAction("Login", "Users");
+        }
+
         [HttpGet]
         public IActionResult Logout()
         {
@@ -103,8 +135,8 @@ namespace TCYDMWebApp.Controllers
             if (response.IsCatched == 1)
             {
                 ModelState.AddModelError("ServerResponse", response.Message);
-                ViewData["ServerResponseError"] = response.Message;
-                return View("UserLogin");
+                TempData["ServerResponseError"] = response.Message;
+                return RedirectToAction("Login");
             }
             var UserData = response.Data.userData;
             if (request.RememberMe)
@@ -135,6 +167,70 @@ namespace TCYDMWebApp.Controllers
             #endregion
             return RedirectToAction("Index", "Home");
         }
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ForgotPasswordData([FromForm] IdentityDTO request)
+        {
+            ReturnMessage<ForgotPasswordDTO> response = new ServiceNode<IdentityDTO, ForgotPasswordDTO>(_fc).PostClient(request,"/api/v1/users/getusertoken");
+            if (response.IsCatched == 1)
+            {
+                TempData["ServerResponseError"] = response.Message;
+                return RedirectToAction("ForgotPassword");
+            }
+            TempData["SuccessResponse"] = _localizer["We send password restore link to your email, please check your email adress"].ToString();
+            #region SendRestoreEmail
+            var configUrl = _configuration["BaseUrl"] + $"/users/restore?uk={response.Data.Token}&&pk={response.Data.Password}";
+            MailSender.SendEmail(
+             "Orxan Hemidov",
+             "orxan.hamidov.orxan.hamidov@mail.ru",
+              response.Data.Name,
+              response.Data.Email,
+             "Email Confirmation",
+              "<a href =" + configUrl + ">Restore account</a>",
+             "orxan.hamidov.orxan.hamidov@mail.ru",
+             "o1o2o3o4o5o6o7o8o9o10"
+             );
+            #endregion
+            return RedirectToAction("Login", "Users");
+
+        }
+        [HttpGet]
+        public IActionResult Restore([FromQuery(Name = "uk")] string uk, [FromQuery(Name = "pk")] string pk)
+        {
+            EmailConfirmationDTO configParams = new EmailConfirmationDTO();
+            configParams.Password = pk;
+            configParams.Token = uk;
+            ReturnMessage<object> response = new ServiceNode<EmailConfirmationDTO, object>(_fc).PostClient(configParams, "/api/v1/users/confirmuser_forgotpassword");
+            if (response.IsCatched == 1)
+            {
+                return Redirect("/");
+            }
+            return RedirectToAction("ChangePassword", "Users",new { uk = configParams.Token});
+        }
+        [HttpGet]
+        public IActionResult ChangePassword([FromQuery(Name = "uk")] string uk)
+        {
+            TempData["uk"] = uk;
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ChangePasswordData([FromForm] ChangePassword request)
+        {
+           
+            ReturnMessage<object> response = new ServiceNode<ChangePassword, object>(_fc).PostClient(request, "/api/v1/users/change_password");
+            if (response.IsCatched == 1)
+            {
+                TempData["ServerResponseError"] = response.Message;
+                return RedirectToAction("ChangePassword");
+            }
+            TempData["SuccessResponse"]=_localizer["Your Password Successfully Changed"].ToString();
+            return RedirectToAction("Login", "Users");
+        }
+
 
 
 

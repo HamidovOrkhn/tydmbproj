@@ -12,13 +12,13 @@
 <div class="our-service">
     <div class="banner-content">
         <a href="/" style="text-transform:capitalize" >@SharedLocalizer["Our Services"]<i class="fas fa-angle-right"></i></a>
-        <p>@Model.ServiceParams.Name</p>
+        <p>@Model?.ServiceParams?.Name</p>
     </div>
     <div class="info-service">
         <div class="text">
-            <h4>@Model.ServiceInfo.Name</h4>
+            <h4>@Model?.ServiceInfo?.Name</h4>
             <p>
-                @Model.ServiceInfo.Info
+                @Model?.ServiceInfo?.Info
             </p>
 
         </div>

@@ -36,7 +36,11 @@ namespace TCYDMWebApp
         {
             services.AddControllersWithViews();
             services.AddSingleton<LocService>();
-        //    services.AddLocalization(options => options.ResourcesPath = "Resources");
+            services.AddControllersWithViews()
+ .AddNewtonsoftJson(options =>
+ options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
+            //    services.AddLocalization(options => options.ResourcesPath = "Resources");
 
             services.AddMvc()
                 .AddViewLocalization()
