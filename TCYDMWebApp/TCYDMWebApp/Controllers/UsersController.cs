@@ -74,7 +74,7 @@ namespace TCYDMWebApp.Controllers
                 TempData["ServerResponseError"] = response.Message;
                 return RedirectToAction("Login");
             }
-            TempData["SuccessResponse"] = _localizer["We send confirmation email to your email adress, please confirm it is actually your email.After confirmation you can access your account"].ToString();
+            TempData["SuccessResponse"] ="success";
             #region SendConfirmationEmail
             var configUrl = _configuration["BaseUrl"] + $"/users/userconfirm?uk={response.Data.Token}&&pk={response.Data.Password}";
             MailSender.SendEmail(
@@ -99,7 +99,7 @@ namespace TCYDMWebApp.Controllers
             EmailConfirmationDTO configParams = new EmailConfirmationDTO();
             configParams.Password = pk;
             configParams.Token = uk;
-            ReturnMessage<object> response = new ServiceNode<EmailConfirmationDTO, object>(_fc).PostClient(configParams, "/api/v1/users/confirmuser");
+            ReturnMessage<object> response = new ServiceNode<EmailConfirmationDTO, object>(_localizer,_fc).PostClient(configParams, "/api/v1/users/confirmuser");
             if (response.IsCatched == 1)
             {
                 return Redirect("/");
@@ -175,13 +175,13 @@ namespace TCYDMWebApp.Controllers
         [HttpPost]
         public IActionResult ForgotPasswordData([FromForm] IdentityDTO request)
         {
-            ReturnMessage<ForgotPasswordDTO> response = new ServiceNode<IdentityDTO, ForgotPasswordDTO>(_fc).PostClient(request,"/api/v1/users/getusertoken");
+            ReturnMessage<ForgotPasswordDTO> response = new ServiceNode<IdentityDTO, ForgotPasswordDTO>(_localizer,_fc).PostClient(request,"/api/v1/users/getusertoken");
             if (response.IsCatched == 1)
             {
                 TempData["ServerResponseError"] = response.Message;
                 return RedirectToAction("ForgotPassword");
             }
-            TempData["SuccessResponse"] = _localizer["We send password restore link to your email, please check your email adress"].ToString();
+            TempData["SuccessResponse"] = "success";
             #region SendRestoreEmail
             var configUrl = _configuration["BaseUrl"] + $"/users/restore?uk={response.Data.Token}&&pk={response.Data.Password}";
             MailSender.SendEmail(
@@ -204,7 +204,7 @@ namespace TCYDMWebApp.Controllers
             EmailConfirmationDTO configParams = new EmailConfirmationDTO();
             configParams.Password = pk;
             configParams.Token = uk;
-            ReturnMessage<object> response = new ServiceNode<EmailConfirmationDTO, object>(_fc).PostClient(configParams, "/api/v1/users/confirmuser_forgotpassword");
+            ReturnMessage<object> response = new ServiceNode<EmailConfirmationDTO, object>(_localizer,_fc).PostClient(configParams, "/api/v1/users/confirmuser_forgotpassword");
             if (response.IsCatched == 1)
             {
                 return Redirect("/");
@@ -221,13 +221,13 @@ namespace TCYDMWebApp.Controllers
         public IActionResult ChangePasswordData([FromForm] ChangePassword request)
         {
            
-            ReturnMessage<object> response = new ServiceNode<ChangePassword, object>(_fc).PostClient(request, "/api/v1/users/change_password");
+            ReturnMessage<object> response = new ServiceNode<ChangePassword, object>(_localizer,_fc).PostClient(request, "/api/v1/users/change_password");
             if (response.IsCatched == 1)
             {
                 TempData["ServerResponseError"] = response.Message;
                 return RedirectToAction("ChangePassword");
             }
-            TempData["SuccessResponse"]=_localizer["Your Password Successfully Changed"].ToString();
+            TempData["SuccessResponse"]= "success";
             return RedirectToAction("Login", "Users");
         }
 

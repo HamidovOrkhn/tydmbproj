@@ -297,11 +297,8 @@ namespace TCYDMWebServices.Controllers.V1
         public IActionResult ConfirmUser([FromBody] EmailConfirmationDTO request)
         {
             #region FunctionBody
-            var existedUser = _db.Users.Where(a => a.Password == request.Password).FirstOrDefault();
-            if (existedUser is null)
-            {
-                return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.NotFound));
-            }
+            var existedUser = _db.Users.Where(a => a.Token == request.Token).FirstOrDefault();
+            
             if (existedUser.Token != request.Token)
             {
                 return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.NotFound));
@@ -310,7 +307,7 @@ namespace TCYDMWebServices.Controllers.V1
             {
                 return StatusCode(400, new ReturnErrorMessage((int)ErrorTypes.Errors.NotFound));
             }
-            existedUser.Token = Guid.NewGuid().ToString();
+            //existedUser.Token = Guid.NewGuid().ToString();
             existedUser.IsConfirmed = 1;
             _db.SaveChanges();
             return Ok(new ReturnMessage());
