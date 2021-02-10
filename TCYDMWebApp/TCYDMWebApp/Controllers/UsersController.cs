@@ -35,9 +35,6 @@ namespace TCYDMWebApp.Controllers
             _fc = client.CreateClient(name:"ApiRequests");
         }
 
-
-       
-   
         [HttpGet]
         public IActionResult Login()
         {
@@ -78,7 +75,7 @@ namespace TCYDMWebApp.Controllers
             #region SendConfirmationEmail
             var configUrl = _configuration["BaseUrl"] + $"/users/userconfirm?uk={response.Data.Token}&&pk={response.Data.Password}";
             MailSender.SendEmail(
-             "Orxan Hemidov",
+             "TCYDM",
              "orxan.hamidov.orxan.hamidov@mail.ru",
               request.Name,
               request.Email,
@@ -175,6 +172,7 @@ namespace TCYDMWebApp.Controllers
         [HttpPost]
         public IActionResult ForgotPasswordData([FromForm] IdentityDTO request)
         {
+            #region ForgotPassword
             ReturnMessage<ForgotPasswordDTO> response = new ServiceNode<IdentityDTO, ForgotPasswordDTO>(_localizer,_fc).PostClient(request,"/api/v1/users/getusertoken");
             if (response.IsCatched == 1)
             {
@@ -185,22 +183,24 @@ namespace TCYDMWebApp.Controllers
             #region SendRestoreEmail
             var configUrl = _configuration["BaseUrl"] + $"/users/restore?uk={response.Data.Token}&&pk={response.Data.Password}";
             MailSender.SendEmail(
-             "Orxan Hemidov",
+             "TCYDM",
              "orxan.hamidov.orxan.hamidov@mail.ru",
               response.Data.Name,
               response.Data.Email,
-             "Email Confirmation",
-              "<a href =" + configUrl + ">Restore account</a>",
+             "Restore Password",
+                "<a href =" + configUrl + ">Restore account</a>",
              "orxan.hamidov.orxan.hamidov@mail.ru",
              "o1o2o3o4o5o6o7o8o9o10"
              );
+           
+            #endregion
             #endregion
             return RedirectToAction("Login", "Users");
-
         }
         [HttpGet]
         public IActionResult Restore([FromQuery(Name = "uk")] string uk, [FromQuery(Name = "pk")] string pk)
         {
+            #region Restore 
             EmailConfirmationDTO configParams = new EmailConfirmationDTO();
             configParams.Password = pk;
             configParams.Token = uk;
@@ -209,6 +209,7 @@ namespace TCYDMWebApp.Controllers
             {
                 return Redirect("/");
             }
+            #endregion
             return RedirectToAction("ChangePassword", "Users",new { uk = configParams.Token});
         }
         [HttpGet]
@@ -220,7 +221,7 @@ namespace TCYDMWebApp.Controllers
         [HttpPost]
         public IActionResult ChangePasswordData([FromForm] ChangePassword request)
         {
-           
+            #region ChangePasswordBody
             ReturnMessage<object> response = new ServiceNode<ChangePassword, object>(_localizer,_fc).PostClient(request, "/api/v1/users/change_password");
             if (response.IsCatched == 1)
             {
@@ -228,6 +229,7 @@ namespace TCYDMWebApp.Controllers
                 return RedirectToAction("ChangePassword");
             }
             TempData["SuccessResponse"]= _localizer["Your Password Successfully Changed"].ToString();
+            #endregion
             return RedirectToAction("Login", "Users");
         }
 

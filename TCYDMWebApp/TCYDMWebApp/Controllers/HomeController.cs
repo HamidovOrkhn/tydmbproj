@@ -36,8 +36,6 @@ namespace TCYDMWebApp.Controllers
             _fc = fc.CreateClient(name: "ApiRequests");
 
         }
- 
-       
         public IActionResult Index()
         {
             return View();
@@ -128,20 +126,11 @@ namespace TCYDMWebApp.Controllers
             #endregion
             return View(model);
         }
-        [RefreshApiToken]
-        public IActionResult Privacy()
-        {
-            var data = new ServiceNode<object, string>(_fc).GetClient("/testapi", token: HttpContext.Session.GetString("JwtSession"));
-            ViewData["apistring"] = data.Data;
-            return View();
-        }
-
         [HttpPost]
         public IActionResult SetLanguage([FromForm] LangDTO request)
         {
-
-              
-              var resp = new ServiceNode<object, Lang>(_localizer, _fc).GetClient("/api/lang/get/"+request.culture);
+            #region SetLangCookie
+            var resp = new ServiceNode<object, Lang>(_localizer, _fc).GetClient("/api/lang/get/"+request.culture);
               Response.Cookies.Append("LangKey",resp.Data.id.ToString(),
               new CookieOptions { Expires = DateTimeOffset.UtcNow.AddDays(1) });
               Response.Cookies.Append(
@@ -149,10 +138,7 @@ namespace TCYDMWebApp.Controllers
               CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(resp.Data.valueKey)),
               new CookieOptions { Expires = DateTimeOffset.UtcNow.AddDays(1) }
           );
-            
-          
-          
-
+            #endregion
             return LocalRedirect(request.returnurl);
         }
 

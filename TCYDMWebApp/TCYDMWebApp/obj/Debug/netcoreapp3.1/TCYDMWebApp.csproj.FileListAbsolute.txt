@@ -299,3 +299,4 @@ C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcorea
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\TCYDMWebApp.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Users\ForgotPassword.cshtml.g.cs
 C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Users\ChangePassword.cshtml.g.cs
+C:\Users\Orxan\source\repos\tydmbproj\TCYDMWebApp\TCYDMWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Modals\MailTemplate.cshtml.g.cs
